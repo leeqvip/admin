@@ -1,0 +1,8 @@
+.admin-page-header{padding: 20px;padding-bottom: 0px;}
+.tpl-index-settings-button{text-align: right;}
+
+.image-title-group img{float: left;margin-right: 10px;height: 48px;}
+.image-title-group p{margin: 0px;}
+.tpl-pagination li a{border-radius: 0px !important;}
+div.content-wrapper{min-height: auto}
+.admin-footer{position: relative;margin-left: 240px;z-index: 1101;border-bottom-left-radius: 3px;}
