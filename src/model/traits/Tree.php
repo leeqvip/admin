@@ -80,6 +80,6 @@ trait Tree
 
     protected function allNodes()
     {
-        return $this->order($this->sortColumn, 'asc')->order($this->pk, 'desc')->all()->toArray();
+        return $this->order($this->sortColumn, 'asc')->order($this->pk, 'asc')->all()->toArray();
     }
 }

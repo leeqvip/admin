@@ -30,11 +30,18 @@ Route::group([
         Route::get('/permission/edit', 'auth\\Permission@edit')->name('techadmin.auth.permission.edit');
         Route::post('/permission/edit', 'auth\\Permission@save');
         Route::get('/permission', 'auth\\Permission@index')->name('techadmin.auth.permission');
+
+        Route::get('/log', 'auth\\Log@index')->name('techadmin.log');
     });
 
     // 首页
     Route::get('/', 'Index@index')->name('techadmin.index');
     Route::get('/dashboard', 'Index@index');
+
+    Route::get('/config/add', 'Config@add')->name('techadmin.config.add');
+    Route::post('/config/add', 'Config@create');
+    Route::get('/config', 'Config@index')->name('techadmin.config');
+    Route::post('/config', 'Config@save');
 
     // 分类
     Route::get('/category/delete', 'Category@delete')->name('techadmin.category.delete');
@@ -48,4 +55,9 @@ Route::group([
     Route::post('/article/edit', 'Article@save');
     Route::get('/article', 'Article@index')->name('techadmin.article');
 
+    // 单页
+    Route::get('/single/delete', 'Single@delete')->name('techadmin.single.delete');
+    Route::get('/single/edit', 'Single@edit')->name('techadmin.single.edit');
+    Route::post('/single/edit', 'Single@save');
+    Route::get('/single', 'Single@index')->name('techadmin.single');
 });

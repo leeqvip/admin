@@ -1,29 +1,29 @@
 <?php
 namespace techadmin\controller;
 
-use techadmin\model\Article as ArticleModel;
 use techadmin\model\Category;
+use techadmin\model\Single as SingleModel;
 use techadmin\service\upload\contract\Factory as Uploader;
 use techadmin\support\AbstractController;
 use think\Controller;
 use think\Request;
 
-class Article extends AbstractController
+class Single extends AbstractController
 {
 
-    protected $article;
+    protected $single;
 
-    public function __construct(ArticleModel $article)
+    public function __construct(SingleModel $single)
     {
         parent::__construct();
-        $this->article = $article;
+        $this->single = $single;
     }
 
     public function index(Request $request, Category $category)
     {
         $data = $request->only(['category_id' => [], 'keywords' => '']);
 
-        $articles = $this->article
+        $articles = $this->single
             ->where('type', 1)
             ->when($data['keywords'], function ($query) use ($data) {
                 $query->whereLike('title', '%' . $data['keywords'] . '%');
@@ -36,7 +36,7 @@ class Article extends AbstractController
                 'query' => $data,
             ]);
         $parents = $category->flatTree();
-        return $this->fetch('article/index', [
+        return $this->fetch('single/index', [
             'articles' => $articles,
             'parents'  => $parents,
         ]);
@@ -44,9 +44,9 @@ class Article extends AbstractController
 
     public function edit(Request $request, Category $category)
     {
-        $article = $this->article->find($request->get('id', 0));
+        $article = $this->single->find($request->get('id', 0));
         $parents = $category->flatTree();
-        return $this->fetch('article/edit', [
+        return $this->fetch('single/edit', [
             'article' => $article,
             'parents' => $parents,
         ]);
@@ -60,18 +60,26 @@ class Article extends AbstractController
                 $data['image'] = $image->getUrlPath();
             }
 
-            $this->article->isUpdate($request->get('id') > 0)->save($data);
+            $hasBinding = $this->single->where('category_id', $data['category_id'])->when($data['id'], function ($query) use ($data) {
+                $query->where('id', '<>', $data['id']);
+            })->count();
+
+            if ($hasBinding) {
+                throw new \Exception("该栏目已经绑定其他单页");
+            }
+
+            $this->single->isUpdate($request->get('id') > 0)->save($data);
 
         } catch (\Exception $e) {
             $this->error($e->getMessage());
         }
-        $this->redirect('techadmin.article');
+        $this->redirect('techadmin.single');
     }
 
     public function delete(Request $request)
     {
         try {
-            $this->article->destroy($request->get('id'));
+            $this->single->destroy($request->get('id'));
         } catch (\Exception $e) {
             return $this->error('删除失败');
         }

@@ -24,8 +24,9 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
+                                    <th>类型</th>
                                     <th>栏目名称</th>
-                                    <th>栏目类型</th>
+                                    <th>排序</th>
                                     <th>时间</th>
                                     <th>操作</th>
                                 </tr>
@@ -34,8 +35,9 @@
                                 {foreach $categorys as $category}
                                 <tr class="gradeX">
                                     <td>{$category.id}</td>
+                                    <td><span class="cate-type am-badge am-radius" data-type="{$category.type}">{$category.type_text}</span></td>
                                     <td>{$category.prefix}{$category.name}</td>
-                                    <td>{$category.type_text}</td>
+                                    <td><span class="am-badge am-badge-success am-radius">{$category.sort}</span></td>
                                     <td>{$category.created_at}</td>
                                     <td>
                                         <div class="tpl-table-black-operation">
@@ -58,4 +60,22 @@
         </div>
     </div>
 </div>
+{/block}
+{block name="footer"}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".cate-type").each(function(index, el) {
+            var dataType = $(this).attr('data-type')
+            if(dataType == 'list'){
+                $(this).addClass('am-badge-primary');
+            }else if(dataType == 'list-img'){
+                $(this).addClass('am-badge-secondary');
+            }else if(dataType == 'single'){
+                $(this).addClass('am-badge-danger');
+            }else if(dataType == 'topic'){
+                $(this).addClass('am-badge-warning');
+            }
+        });
+    });
+</script>
 {/block}
