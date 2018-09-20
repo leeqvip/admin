@@ -15,6 +15,8 @@ trait Tree
      */
     protected $sortColumn = 'sort';
 
+    protected $nodes;
+
     /**
      * Format data to tree like array.
      *
@@ -23,6 +25,22 @@ trait Tree
     public function toTree()
     {
         return $this->buildNestedArray();
+    }
+
+    public function getChildrenNodes($parentId, $tree = null)
+    {
+        if (is_null($tree)) {
+            $tree = $this->toTree();
+        }
+
+        foreach ($tree as $key => $value) {
+            $children = isset($value['children']) ? $value['children'] : [];
+            if ($value['id'] == $parentId) {
+                return $children;
+            }
+            $this->getChildrenNodes($parentId, $children);
+        }
+        return null;
     }
 
     public function flatTree(array $nodes = [])

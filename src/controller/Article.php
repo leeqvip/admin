@@ -32,6 +32,7 @@ class Article extends AbstractController
                 $query->whereIn('category_id', $data['category_id']);
             })
             ->order('id', 'desc')
+            ->with('category')
             ->paginate([
                 'query' => $data,
             ]);

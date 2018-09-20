@@ -60,4 +60,32 @@ Route::group([
     Route::get('/single/edit', 'Single@edit')->name('techadmin.single.edit');
     Route::post('/single/edit', 'Single@save');
     Route::get('/single', 'Single@index')->name('techadmin.single');
+
+    // 导航菜单
+    Route::get('/nav/delete', 'Nav@delete')->name('techadmin.nav.delete');
+    Route::get('/nav/edit', 'Nav@edit')->name('techadmin.nav.edit');
+    Route::post('/nav/edit', 'Nav@save');
+    Route::get('/nav', 'Nav@index')->name('techadmin.nav');
+
+    // 广告管理
+    Route::get('/advertising/block/delete', 'AdvertisingBlock@delete')->name('techadmin.advertising.block.delete');
+    Route::get('/advertising/block/edit', 'AdvertisingBlock@edit')->name('techadmin.advertising.block.edit');
+    Route::post('/advertising/block/edit', 'AdvertisingBlock@save');
+    Route::get('/advertising/block', 'AdvertisingBlock@index')->name('techadmin.advertising.block');
+
+    Route::get('/advertising/delete', 'Advertising@delete')->name('techadmin.advertising.delete');
+    Route::get('/advertising/edit', 'Advertising@edit')->name('techadmin.advertising.edit');
+    Route::post('/advertising/edit', 'Advertising@save');
+    Route::get('/advertising', 'Advertising@index')->name('techadmin.advertising');
+
+    // 链接管理
+    Route::get('/link/block/delete', 'LinkBlock@delete')->name('techadmin.link.block.delete');
+    Route::get('/link/block/edit', 'LinkBlock@edit')->name('techadmin.link.block.edit');
+    Route::post('/link/block/edit', 'LinkBlock@save');
+    Route::get('/link/block', 'LinkBlock@index')->name('techadmin.link.block');
+
+    Route::get('/link/delete', 'Link@delete')->name('techadmin.link.delete');
+    Route::get('/link/edit', 'Link@edit')->name('techadmin.link.edit');
+    Route::post('/link/edit', 'Link@save');
+    Route::get('/link', 'Link@index')->name('techadmin.link');
 });
