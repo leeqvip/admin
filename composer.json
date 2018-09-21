@@ -1,7 +1,6 @@
 {
     "name": "techone/admin",
-    "description": "the admin framework based on thinkphp",
-    "type": "project",
+    "description": "the admin framework based on thinkphp",    
     "keywords": [        
         "framework",
         "thinkphp",
