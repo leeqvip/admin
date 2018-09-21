@@ -1,87 +1,4 @@
-$(function() {
-    // 读取body data-type 判断是哪个页面然后执行相应页面方法，方法在下面。
-    var dataType = $('body').attr('data-type');
-    for (key in pageData) {
-        if (key == dataType) {
-            pageData[key]();
-        }
-    }
-    //     // 判断用户是否已有自己选择的模板风格
-    //    if(storageLoad('SelcetColor')){
-    //      $('body').attr('class',storageLoad('SelcetColor').Color)
-    //    }else{
-    //        storageSave(saveSelectColor);
-    //        $('body').attr('class','theme-black')
-    //    }
-
-    autoLeftNav();
-    $(window).resize(function() {
-        autoLeftNav();
-    });
-
-    //    if(storageLoad('SelcetColor')){
-
-    //     }else{
-    //       storageSave(saveSelectColor);
-    //     }
-})
-
-
-// 页面数据
-var pageData = {
-    // ===============================================
-    // 首页
-    // ===============================================
-    'index': function indexData() {
-        // $('#example-r').DataTable({
-
-        //     bInfo: false, //页脚信息
-        //     dom: 'ti'
-        // });
-    },
-
-}
-
-
-// 风格切换
-
-$('.tpl-skiner-toggle').on('click', function() {
-    $('.tpl-skiner').toggleClass('active');
-})
-
-$('.tpl-skiner-content-bar').find('span').on('click', function() {
-    $('body').attr('class', $(this).attr('data-color'))
-    saveSelectColor.Color = $(this).attr('data-color');
-    // 保存选择项
-    storageSave(saveSelectColor);
-
-})
-
-
-
-
-// 侧边菜单开关
-
-
 function autoLeftNav() {
-
-
-
-    $('.tpl-header-switch-button').on('click', function() {
-        if ($('.left-sidebar').is('.active')) {
-            if ($(window).width() > 1024) {
-                $('.tpl-content-wrapper').removeClass('active');
-            }
-            $('.left-sidebar').removeClass('active');
-        } else {
-
-            $('.left-sidebar').addClass('active');
-            if ($(window).width() > 1024) {
-                $('.tpl-content-wrapper').addClass('active');
-            }
-        }
-    })
-
     if ($(window).width() < 1024) {
         $('.left-sidebar').addClass('active');
     } else {
@@ -89,8 +6,68 @@ function autoLeftNav() {
     }
 }
 
+function autoActiveNav(){
+    $(".sidebar-nav .sidebar-nav-link").each(function(index, el) {
+        var currentUrl = location.href;
+        var navUrl = $(this).children('a').attr('href');
+        console.log(currentUrl);
+        console.log(navUrl);
+        if(currentUrl.indexOf(navUrl)>0)       {
+            $(this).children('a').addClass('sub-active').parents('.sidebar-nav-sub').show('400', function() {
+                
+            }).prev('.sidebar-nav-sub-title').addClass('active')
+        }
+    });
+}
+
+function autoResize(){
+    var minHeight = 0;
+    $(".content-wrapper").children().each(function(index, el) {
+        minHeight += parseInt($(this).outerHeight(true));
+    });
+    var needHeight = $(this).height() - $(".admin-header").height() ;
+    minHeight = Math.max(minHeight, needHeight)
+    $(".content-wrapper").css('min-height', parseInt(minHeight) );
+}
+
+function adminInit(){
+    autoResize();
+    autoLeftNav();
+}
+
+
+
+
 
 $(document).ready(function() {
+    // 风格切换
+    $('.tpl-skiner-toggle').on('click', function() {
+        $('.tpl-skiner').toggleClass('active');
+    })
+
+    $('.tpl-skiner-content-bar').find('span').on('click', function() {
+        $('body').attr('class', $(this).attr('data-color'))
+        saveSelectColor.Color = $(this).attr('data-color');
+        // 保存选择项
+        storageSave(saveSelectColor);
+    })
+
+
+    // 侧边菜单开关
+    $('.tpl-header-switch-button').on('click', function() {
+        if ($('.left-sidebar').is('.active')) {
+            if ($(window).width() > 1024) {
+                $('.tpl-content-wrapper').removeClass('active');
+            }
+            $('.left-sidebar').removeClass('active');
+        } else {
+            $('.left-sidebar').addClass('active');
+            if ($(window).width() > 1024) {
+                $('.tpl-content-wrapper').addClass('active');
+            }
+        }
+    });
+
     // 侧边菜单
     $('.sidebar-nav-sub-title').on('click', function() {
         $(this).siblings('.sidebar-nav-sub').slideToggle(80)
@@ -100,8 +77,10 @@ $(document).ready(function() {
 
     $('.datetimepicker-btn').datetimepicker();
 
-    $('.error-remove').error(function() {
-        $(this).remove();
+    $('table.am-text-middle').find('td').addClass('am-text-middle');
+
+    $('.error-nopic').error(function() {
+        $(this).attr('src', adminApp.path.assets + '/img/nopic.png');
     });
 
     $('.form-img').on('change', function() {
@@ -111,6 +90,14 @@ $(document).ready(function() {
         });
         $(this).parents(".am-form-file").next('.file-list').html(fileNames);
     });
+    $(".show-status").each(function(index, el) {
+            var showStatus = $(this).attr('data-status')
+            if(showStatus == 1){
+                $(this).addClass('am-text-success').append(' 正常');
+            }else{
+                 $(this).append(' 隐藏');
+            }
+        });
 
     $('.form-editor').each(function(index, el) {
         if(!window.wangEditor){
@@ -132,11 +119,14 @@ $(document).ready(function() {
         editor.create()
         $text.val(editor.txt.html())
     });
-
-    $(window).resize(function(event) {
-        var needHeight = $(this).height() - $(".admin-header").height() - $(".admin-footer").height();
-        var minHeight = Math.max($(".content-wrapper").height() , needHeight)
-        $(".content-wrapper").css('min-height',minHeight);
-    });
-    $(window).trigger("resize");    
 });
+
+$(window).resize(function() {
+    adminInit();
+});
+
+adminInit();
+autoActiveNav();
+setInterval(function(){
+    adminInit();
+},500)

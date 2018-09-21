@@ -39,6 +39,8 @@ class Boot
         $this->importMiddleware();
         $this->bindProviders();
         $this->bootRoute();
+
+        $this->initConsole();
     }
 
     protected function loadHelper()
@@ -107,6 +109,13 @@ class Boot
                     }
                 })->prefix($this->namespace);
             }
+        }
+    }
+
+    public function initConsole()
+    {
+        if (!(php_sapi_name() === 'cli' || php_sapi_name() === 'phpdbg')) {
+            return;
         }
     }
 }
