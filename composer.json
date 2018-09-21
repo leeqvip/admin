@@ -2,11 +2,12 @@
     "name": "techone/admin",
     "description": "the admin framework based on thinkphp",
     "type": "project",
-    "keywords": [
+    "keywords": [        
         "framework",
-        "admin",
-    ],    
-    "license": "Apache-2.0",
+        "thinkphp",
+        "admin"
+    ],
+    "license": "MIT",
     "authors": [
         {
             "name": "TechLee",
