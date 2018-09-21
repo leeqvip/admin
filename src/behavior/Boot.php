@@ -2,7 +2,6 @@
 namespace techadmin\behavior;
 
 use think\App;
-use think\Container;
 use think\facade\Route;
 
 /**
@@ -52,14 +51,23 @@ class Boot
 
     protected function loadConfig()
     {
-        if (is_file(admin_config_path('filesystems.php'))) {
-            $filesystems = require_once admin_config_path('/filesystems.php');
-            $config      = Container::get('config');
-            $paginate    = $config->pull('filesystems');
-            $config->set(array_merge(
-                is_array($paginate) ? $paginate : [],
-                $filesystems
-            ), 'filesystems');
+        $configFileNames = [
+            'filesystems',
+            'techadmin',
+        ];
+        foreach ($configFileNames as $fileName) {
+            if (is_file(admin_config_path($fileName . '.php'))) {
+                $file       = admin_config_path($fileName . '.php');
+                $configName = pathinfo($file, PATHINFO_FILENAME);
+                $config     = $this->app->config->pull($configName);
+
+                $this->app->config->load($file, $configName);
+
+                // 重新加载应用中的同名配置，以覆盖此配置
+                if (is_file($this->app->getConfigPath() . basename($file))) {
+                    $this->app->config->load($this->app->getConfigPath() . basename($file), $configName);
+                }
+            }
         }
     }
 

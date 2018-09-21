@@ -31,7 +31,7 @@ Route::group([
         Route::post('/permission/edit', 'auth\\Permission@save');
         Route::get('/permission', 'auth\\Permission@index')->name('techadmin.auth.permission');
 
-        Route::get('/log', 'auth\\Log@index')->name('techadmin.log');
+        Route::get('/log', 'auth\\Log@index')->name('techadmin.auth.log');
     });
 
     // 首页

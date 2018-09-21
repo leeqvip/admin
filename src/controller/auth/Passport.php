@@ -2,7 +2,7 @@
 namespace techadmin\controller\auth;
 
 use techadmin\service\auth\contract\Auth;
-use techadmin\support\AbstractController;
+use techadmin\support\controller\AbstractController;
 use think\Controller;
 use think\Request;
 

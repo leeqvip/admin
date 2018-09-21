@@ -22,6 +22,9 @@ class SessionGuard implements contract\Guard
     public function login(Authenticate $authenticate)
     {
         Session::set($this->getName(), $authenticate->getAuthIdentifier());
+        $authenticate->login_at = date('Y-m-d H:i:s');
+        $authenticate->login_ip = request()->ip();
+        $authenticate->save();
         $this->user = $authenticate;
     }
 

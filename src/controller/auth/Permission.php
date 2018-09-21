@@ -2,7 +2,7 @@
 namespace techadmin\controller\auth;
 
 use techadmin\model\Permission as PermissionModel;
-use techadmin\support\AbstractController;
+use techadmin\support\controller\AbstractController;
 use think\Controller;
 use think\Request;
 

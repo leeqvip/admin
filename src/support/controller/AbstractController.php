@@ -1,7 +1,8 @@
 <?php
-namespace techadmin\support;
+namespace techadmin\support\controller;
 
 use techadmin\model\Menu;
+use techadmin\service\auth\facade\Auth;
 use think\Container;
 use think\Controller;
 use think\facade\Config;
@@ -37,18 +38,15 @@ abstract class AbstractController extends Controller
 
     public function setViewPath()
     {
-        $this->viewPath = admin_view_path();
+        $this->viewPath = config('techadmin.template.view_path');
         $this->view->config('view_path', $this->viewPath);
-        $this->view->config('tpl_replace_string', [
-            '__TECHADMIN_ASSETS__' => '/vendor/techadmin/assets',
-        ]);
+        $this->view->config('tpl_replace_string', config('techadmin.template.tpl_replace_string'));
     }
 
     public function assignCommon()
     {
-        $menus = app(Menu::class)->toTree();
-        $this->view->assign([
-            'menus' => $menus,
-        ]);
+        $menus   = app(Menu::class)->toTree();
+        $adminer = Auth::user();
+        $this->view->assign(compact('menus', 'adminer'));
     }
 }

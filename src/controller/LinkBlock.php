@@ -2,7 +2,7 @@
 namespace techadmin\controller;
 
 use techadmin\model\LinkBlock as LinkBlockModel;
-use techadmin\support\AbstractController;
+use techadmin\support\controller\AbstractController;
 use think\Controller;
 use think\Request;
 

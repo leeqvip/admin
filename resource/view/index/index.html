@@ -4,36 +4,52 @@
         <div class="am-u-sm-12 am-u-md-8">
             <div class="widget am-cf">
                 <div class="widget-head am-cf">
-                    <div class="widget-title am-fl">月度财务收支计划</div>
+                    <div class="widget-title am-fl">操作记录</div>
                     <div class="widget-function am-fr">
-                        <a href="javascript:;" class="am-icon-cog"></a>
+                        <a href="{:url('techadmin.auth.log')}" class="am-icon-list"></a>
                     </div>
                 </div>
-                <div class="widget-body-md widget-body tpl-amendment-echarts am-fr" id="tpl-echarts">
+                <div class="widget-body-md widget-body am-fr">
+                    <ul class="am-list am-list-static">
+                        {foreach $logs as $log}
+                        <li class="am-text-truncate">
+                            <div>
+                            <span class="am-badge am-badge-warning am-radius">{$log.adminer.admin_account}</span>
+                            &nbsp;于&nbsp;{:date('m月d日 H:i',strtotime($log.created_at))}&nbsp;访问了&nbsp;<code>【{$log.method}】{$log.path}</code>，终端<code>{$log.browser}</code>，IP地址<code>{$log.ip}</code>。
+                            </div>
+                        </li>
+                        {/foreach}
+                    </ul>
                 </div>
             </div>
         </div>
         <div class="am-u-sm-12 am-u-md-4">
             <div class="widget am-cf">
                 <div class="widget-head am-cf">
-                    <div class="widget-title am-fl">专用服务器负载</div>
+                    <div class="widget-title am-fl">系统信息</div>
                     <div class="widget-function am-fr">
-                        <a href="javascript:;" class="am-icon-cog"></a>
+                        
                     </div>
                 </div>
                 <div class="widget-body widget-body-md am-fr">
-                    <div class="am-progress-title">CPU Load <span class="am-fr am-progress-title-more">28% / 100%</span></div>
-                    <div class="am-progress">
-                        <div class="am-progress-bar" style="width: 15%"></div>
-                    </div>
-                    <div class="am-progress-title">CPU Load <span class="am-fr am-progress-title-more">28% / 100%</span></div>
-                    <div class="am-progress">
-                        <div class="am-progress-bar  am-progress-bar-warning" style="width: 75%"></div>
-                    </div>
-                    <div class="am-progress-title">CPU Load <span class="am-fr am-progress-title-more">28% / 100%</span></div>
-                    <div class="am-progress">
-                        <div class="am-progress-bar am-progress-bar-danger" style="width: 35%"></div>
-                    </div>
+                    <ul class="am-list am-list-static">
+                        <li>
+                            <i class="am-icon-flag"></i>
+                            TechAdmin版本：{$systemInfo.appVersion}
+                        </li>
+                        <li>
+                            <i class="am-icon-windows"></i>
+                            操作系统：{$systemInfo.os}
+                        </li>
+                        <li>
+                            <i class="am-icon-inbox"></i>
+                            运行环境：{$systemInfo.serverSoftware}、{$systemInfo.phpVersion}
+                        </li>
+                        <li>
+                            <i class="am-icon-clock-o"></i>
+                            服务器时间：{$systemInfo.systemDate}
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -50,9 +66,9 @@
                 </div>
                 <img class="achievement-image" src="__TECHADMIN_ASSETS__/img/user07.png" alt="">
                 <div class="achievement-description">
-                    禁言小张在
-                    <strong>30天内</strong> 禁言了
-                    <strong>200多</strong>人。
+                    最近登录
+                    <strong>{$adminer.login_at}</strong>，登录IP为
+                    <strong>{$adminer.login_ip}</strong>。
                 </div>
             </div>
         </div>
@@ -63,88 +79,19 @@
                         <table width="100%" class="am-table am-table-compact am-text-nowrap tpl-table-black " id="example-r">
                             <thead>
                                 <tr>
-                                    <th>文章标题</th>
+                                    <th>最新发布</th>
                                     <th>作者</th>
                                     <th>时间</th>
-                                    <th>操作</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                {foreach $latestRelease as $article}
                                 <tr class="gradeX">
                                     <td>新加坡大数据初创公司 Latize 获 150 万美元风险融资</td>
-                                    <td>张鹏飞</td>
-                                    <td>2016-09-26</td>
-                                    <td>
-                                        <div class="tpl-table-black-operation">
-                                            <a href="javascript:;">
-                                                <i class="am-icon-pencil"></i> 编辑
-                                            </a>
-                                            <a href="javascript:;" class="tpl-table-black-operation-del">
-                                                <i class="am-icon-trash"></i> 删除
-                                            </a>
-                                        </div>
-                                    </td>
+                                    <td><span class="am-badge am-badge-success">{$article.category.name}</span></td>
+                                    <td>{$article.created_at}</td>
                                 </tr>
-                                <tr class="even gradeC">
-                                    <td>自拍的“政治角色”：观众背对希拉里自拍合影表示“支持”</td>
-                                    <td>天纵之人</td>
-                                    <td>2016-09-26</td>
-                                    <td>
-                                        <div class="tpl-table-black-operation">
-                                            <a href="javascript:;">
-                                                <i class="am-icon-pencil"></i> 编辑
-                                            </a>
-                                            <a href="javascript:;" class="tpl-table-black-operation-del">
-                                                <i class="am-icon-trash"></i> 删除
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="gradeX">
-                                    <td>关于创新管理，我想和你当面聊聊。</td>
-                                    <td>王宽师</td>
-                                    <td>2016-09-26</td>
-                                    <td>
-                                        <div class="tpl-table-black-operation">
-                                            <a href="javascript:;">
-                                                <i class="am-icon-pencil"></i> 编辑
-                                            </a>
-                                            <a href="javascript:;" class="tpl-table-black-operation-del">
-                                                <i class="am-icon-trash"></i> 删除
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="even gradeC">
-                                    <td>究竟是趋势带动投资，还是投资引领趋势？</td>
-                                    <td>着迷</td>
-                                    <td>2016-09-26</td>
-                                    <td>
-                                        <div class="tpl-table-black-operation">
-                                            <a href="javascript:;">
-                                                <i class="am-icon-pencil"></i> 编辑
-                                            </a>
-                                            <a href="javascript:;" class="tpl-table-black-operation-del">
-                                                <i class="am-icon-trash"></i> 删除
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="even gradeC">
-                                    <td>Docker领域再添一员，网易云发布“蜂巢”，加入云计算之争</td>
-                                    <td>醉里挑灯看键</td>
-                                    <td>2016-09-26</td>
-                                    <td>
-                                        <div class="tpl-table-black-operation">
-                                            <a href="javascript:;">
-                                                <i class="am-icon-pencil"></i> 编辑
-                                            </a>
-                                            <a href="javascript:;" class="tpl-table-black-operation-del">
-                                                <i class="am-icon-trash"></i> 删除
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
+                                {/foreach}
                             </tbody>
                         </table>
                     </div>

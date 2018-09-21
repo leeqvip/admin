@@ -4,7 +4,7 @@ namespace techadmin\controller\auth;
 use techadmin\model\Adminer as AdminerModel;
 use techadmin\model\Role;
 use techadmin\service\upload\contract\Factory as Uploader;
-use techadmin\support\AbstractController;
+use techadmin\support\controller\AbstractController;
 use think\Controller;
 use think\exception\ValidateException;
 use think\facade\Validate;

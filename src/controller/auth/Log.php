@@ -2,7 +2,7 @@
 namespace techadmin\controller\auth;
 
 use techadmin\model\OperationLog;
-use techadmin\support\AbstractController;
+use techadmin\support\controller\AbstractController;
 use think\Controller;
 
 class Log extends AbstractController

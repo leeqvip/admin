@@ -4,7 +4,7 @@ namespace techadmin\controller;
 use techadmin\model\Category;
 use techadmin\model\Single as SingleModel;
 use techadmin\service\upload\contract\Factory as Uploader;
-use techadmin\support\AbstractController;
+use techadmin\support\controller\AbstractController;
 use think\Controller;
 use think\Request;
 
