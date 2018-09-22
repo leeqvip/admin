@@ -1,29 +1,29 @@
-# TechAdmin : The admin framework based on ThinkPHP5.1+
+# TechAdmin 
 
 ## Intro
 
-Quickly create an admin system
+基于ThinkPHP5.1+和AmazeUI的快速后台开发框架
 
 ## Install
 
-The fastest way to install TechAdmin is to add it to your project using Composer (https://getcomposer.org/).
+最方便的安装方式就是使用Composer ( https://getcomposer.org/ )，在这之前务必先搭建好thinkphp5.1项目
 
-1、Require TechAdmin as a dependency using Composer:
+1、安装 TechAdmin :
 
 ```
 composer require techone/admin
 ```
 
-2、Initialize and migrate
+2、初始化和数据迁移
 
 ```
 php think techadmin:init
 php think techadmin:migrate:run
 ```
 
-3、Config
+3、配置
 
-add the behavior in `application/tags.php`
+添加行为在 `application/tags.php`
 
 ```
 return [
@@ -36,9 +36,9 @@ return [
 ];
 ```
 
-## Welcome to TechAdmin
+## 进入TechAdmin后台
 
-open the admin link like this：
+打开后台地址，例如：
 
 http://yourdomain/admin
 
