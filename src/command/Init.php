@@ -18,7 +18,7 @@ class Init extends Command
 
     protected function configure()
     {
-        $this->setName('init')->setDescription('init techadmin');
+        $this->setName('techadmin:init')->setDescription('init techadmin');
     }
 
     protected function execute(Input $input, Output $output)
