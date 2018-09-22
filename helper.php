@@ -29,3 +29,10 @@ function admin_view_path($path = '')
 {
     return admin_path('resource/view/') . ltrim($path, '/');
 }
+
+if (php_sapi_name() === 'cli' || php_sapi_name() === 'phpdbg') {
+	\think\Console::addDefaultCommands([
+		'techadmin:init' => \techadmin\command\Init::class,
+		'techadmin:migrate:run' => \techadmin\command\Migrate::class,
+	]);
+}

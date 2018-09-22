@@ -34,7 +34,7 @@ class Boot
 
     public function run(App $app)
     {
-        $this->loadHelper();
+        // $this->loadHelper();
         $this->loadConfig();
         $this->importMiddleware();
         $this->bindProviders();
@@ -43,13 +43,13 @@ class Boot
         $this->initConsole();
     }
 
-    protected function loadHelper()
-    {
-        // 加载公共文件
-        if (is_file(dirname(dirname(__DIR__)) . '/helper.php')) {
-            include_once dirname(dirname(__DIR__)) . '/helper.php';
-        }
-    }
+    // protected function loadHelper()
+    // {
+    //     // 加载公共文件
+    //     if (is_file(dirname(dirname(__DIR__)) . '/helper.php')) {
+    //         include_once dirname(dirname(__DIR__)) . '/helper.php';
+    //     }
+    // }
 
     protected function loadConfig()
     {

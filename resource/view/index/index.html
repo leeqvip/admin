@@ -87,7 +87,7 @@
                             <tbody>
                                 {foreach $latestRelease as $article}
                                 <tr class="gradeX">
-                                    <td>新加坡大数据初创公司 Latize 获 150 万美元风险融资</td>
+                                    <td>{$article.title}</td>
                                     <td><span class="am-badge am-badge-success">{$article.category.name}</span></td>
                                     <td>{$article.created_at}</td>
                                 </tr>
