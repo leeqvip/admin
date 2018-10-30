@@ -43,6 +43,15 @@ class Category extends AbstractController
 
             $data = $request->post();
 
+            if (!empty($data['parent_id'])) {
+                $parent = $this->category->find($data['parent_id']);
+                if (!$parent) {
+                    return $this->error('所选上级栏目不存在');
+                }
+            }
+
+            $data['parent_path'] = isset($parent) ? $parent['parent_path'] . $parent['id'] . ',' : '0,';
+
             $res = $this->category->isUpdate($request->get('id') > 0)->save($data);
 
         } catch (\Exception $e) {

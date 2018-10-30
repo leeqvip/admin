@@ -34,4 +34,9 @@ class Category extends Model
         }
         return isset($map[$type]) ? $map[$type] : '';
     }
+
+    public function articles()
+    {
+        return $this->hasMany(Article::class, 'category_id', 'id');
+    }
 }

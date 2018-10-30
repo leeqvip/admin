@@ -70,7 +70,7 @@ class PermissionCheck
                 return true;
             }
         } else {
-            if ($this->startsWith($currentPath, rtrim(rtrim($httpPath, '*'), '/'))) {
+            if ($this->startsWith($currentPath, rtrim($httpPath, '*'))) {
                 return true;
             }
         }
@@ -101,7 +101,7 @@ class PermissionCheck
     {
         $currentPath = ltrim(trim($this->request->path(), '/'), 'admin');
         if ($currentPath !== '/') {
-            $currentPath = trim($currentPath, '/');
+            $currentPath = rtrim($currentPath, '/');
         }
         return $currentPath;
     }
@@ -109,7 +109,7 @@ class PermissionCheck
     public function parseHttpPath($httpPath)
     {
         return array_map(function ($row) {
-            return trim(trim($row), '/');
+            return rtrim(trim($row), '/');
         }, explode(PHP_EOL, $httpPath));
     }
 

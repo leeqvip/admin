@@ -1,5 +1,7 @@
 <?php
 
+use techadmin\model\Config;
+
 function app_path($path = '')
 {
     return env('app_path') . ltrim($path, '/');
@@ -30,9 +32,14 @@ function admin_view_path($path = '')
     return admin_path('resource/view/') . ltrim($path, '/');
 }
 
+function site_config($key)
+{
+    return Config::get($key);
+}
+
 if (php_sapi_name() === 'cli' || php_sapi_name() === 'phpdbg') {
-	\think\Console::addDefaultCommands([
-		'techadmin:init' => \techadmin\command\Init::class,
-		'techadmin:migrate:run' => \techadmin\command\Migrate::class,
-	]);
+    \think\Console::addDefaultCommands([
+        'techadmin:init'        => \techadmin\command\Init::class,
+        'techadmin:migrate:run' => \techadmin\command\Migrate::class,
+    ]);
 }

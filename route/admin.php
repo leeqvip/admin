@@ -88,4 +88,7 @@ Route::group([
     Route::get('/link/edit', 'Link@edit')->name('techadmin.link.edit');
     Route::post('/link/edit', 'Link@save');
     Route::get('/link', 'Link@index')->name('techadmin.link');
+
+    Route::get('/message/delete', 'Message@delete')->name('techadmin.message.delete');
+    Route::get('/message', 'Message@index')->name('techadmin.message');
 });

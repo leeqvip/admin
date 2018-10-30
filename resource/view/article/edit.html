@@ -79,6 +79,23 @@
                         </div>
                         <div class="am-u-md-12 am-u-lg-3">
                             <div class="am-panel am-panel-default">
+                                <div class="am-panel-hd">标签</div>
+                                <div class="am-panel-bd">                                    
+                                    <div class="am-form-group">
+                                        <label class="am-u-sm-12 am-form-label  am-text-left">标签 </label>
+                                        <div class="am-u-sm-12">
+                                            {foreach $tags as $tag}
+                                            <label class="am-checkbox-inline">
+                                                <input name="tags[]" type="checkbox" value="{$tag.id}" minchecked="1" {if in_array($tag.id,$article->tags->column('id'))}checked{/if}> {$tag.name}
+                                            </label>
+                                            {/foreach}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="am-u-md-12 am-u-lg-3">
+                            <div class="am-panel am-panel-default">
                                 <div class="am-panel-hd">状态</div>
                                 <div class="am-panel-bd">
                                     <div class="am-form-group">

@@ -2,7 +2,9 @@
 namespace techadmin\controller;
 
 use techadmin\model\Article as ArticleModel;
+use techadmin\model\ArticleTag;
 use techadmin\model\Category;
+use techadmin\model\Tag;
 use techadmin\service\upload\contract\Factory as Uploader;
 use techadmin\support\controller\AbstractController;
 use think\Controller;
@@ -13,13 +15,16 @@ class Article extends AbstractController
 
     protected $article;
 
-    public function __construct(ArticleModel $article)
+    protected $category;
+
+    public function __construct(ArticleModel $article, Category $category)
     {
         parent::__construct();
-        $this->article = $article;
+        $this->article  = $article;
+        $this->category = $category;
     }
 
-    public function index(Request $request, Category $category)
+    public function index(Request $request)
     {
         $data = $request->only(['category_id' => [], 'keywords' => '']);
 
@@ -30,26 +35,32 @@ class Article extends AbstractController
             })
             ->when($data['category_id'], function ($query) use ($data) {
                 $query->whereIn('category_id', $data['category_id']);
+                foreach ($data['category_id'] as $value) {
+                    $query->whereOr('category_parent_path', 'like', '%,' . $value . ',%');
+                }
             })
             ->order('id', 'desc')
             ->with('category')
             ->paginate([
                 'query' => $data,
             ]);
-        $parents = $category->flatTree();
+        $parents = $this->category->flatTree();
         return $this->fetch('article/index', [
             'articles' => $articles,
             'parents'  => $parents,
         ]);
     }
 
-    public function edit(Request $request, Category $category)
+    public function edit(Request $request, Tag $tag)
     {
         $article = $this->article->find($request->get('id', 0));
-        $parents = $category->flatTree();
+        $parents = $this->category->flatTree();
+        $tags    = $tag->select();
+
         return $this->fetch('article/edit', [
             'article' => $article,
             'parents' => $parents,
+            'tags'    => $tags,
         ]);
     }
 
@@ -61,7 +72,26 @@ class Article extends AbstractController
                 $data['image'] = $image->getUrlPath();
             }
 
-            $this->article->isUpdate($request->get('id') > 0)->save($data);
+            if (!empty($data['category_id'])) {
+                $parent = $this->category->find($data['category_id']);
+                if (!$parent) {
+                    return $this->error('所属栏目不存在');
+                }
+            }
+
+            $data['category_parent_path'] = isset($parent) ? $parent['parent_path'] . $parent['id'] . ',' : '0,';
+
+            $tags = isset($data['tags']) ? $data['tags'] : [];
+
+            $article = $this->article->create($data, true, true);
+
+            foreach ($tags as $tag) {
+                ArticleTag::create([
+                    'article_id' => $article->id,
+                    'tag_id'     => $tag,
+                ], true, true);
+            }
+            ArticleTag::where('article_id', $article->id)->whereNotIn('tag_id', $tags)->delete();
 
         } catch (\Exception $e) {
             $this->error($e->getMessage());
