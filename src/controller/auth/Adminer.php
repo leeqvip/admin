@@ -1,11 +1,11 @@
 <?php
+
 namespace techadmin\controller\auth;
 
 use techadmin\model\Adminer as AdminerModel;
 use techadmin\model\Role;
 use techadmin\service\upload\contract\Factory as Uploader;
 use techadmin\support\controller\AbstractController;
-use think\Controller;
 use think\exception\ValidateException;
 use think\facade\Validate;
 use think\Request;
@@ -23,6 +23,7 @@ class Adminer extends AbstractController
     public function index()
     {
         $adminers = $this->adminer->with('roles')->paginate();
+
         return $this->fetch('auth/adminer/index', [
             'adminers' => $adminers,
         ]);
@@ -31,7 +32,7 @@ class Adminer extends AbstractController
     public function edit(Request $request, Role $role)
     {
         $adminer = $this->adminer->find($request->get('id', 0));
-        $roles   = $role->select();
+        $roles = $role->select();
         $roleIds = $adminer ? $adminer->roles()->column('id') : [];
 
         return $this->fetch('auth/adminer/edit', compact('adminer', 'roleIds', 'roles'));
@@ -94,8 +95,9 @@ class Adminer extends AbstractController
         $adminer = $this->adminer->allowField(true)->create($data, true, true);
 
         if (!$adminer) {
-            throw new \Exception("创建管理员失败");
+            throw new \Exception('创建管理员失败');
         }
+
         return $adminer;
     }
 
@@ -110,8 +112,9 @@ class Adminer extends AbstractController
 
         $adminer = $this->adminer->isUpdate(true)->update($data);
         if (!$adminer) {
-            throw new \Exception("修改管理员失败");
+            throw new \Exception('修改管理员失败');
         }
+
         return $adminer;
     }
 
@@ -120,10 +123,10 @@ class Adminer extends AbstractController
         $validate = Validate::make([
             'admin_account' => 'require|alphaDash|max:16|unique:techadmin_adminer',
         ], [
-            'admin_account.require'   => '登录账号必须',
+            'admin_account.require' => '登录账号必须',
             'admin_account.alphaDash' => '登录账号只能是字母、数字和下划线_及破折号-',
-            'admin_account.max'       => '登录账号最多不能超过16个字符',
-            'admin_account.unique'    => '登录账号被使用',
+            'admin_account.max' => '登录账号最多不能超过16个字符',
+            'admin_account.unique' => '登录账号被使用',
         ]);
 
         if (!$validate->check($data)) {
@@ -136,10 +139,10 @@ class Adminer extends AbstractController
         $validate = Validate::make([
             'admin_password' => 'require|alphaDash|confirm|max:16',
         ], [
-            'admin_password.require'   => '登录密码必须',
+            'admin_password.require' => '登录密码必须',
             'admin_password.alphaDash' => '登录密码只能是字母、数字和下划线_及破折号-',
-            'admin_password.max'       => '登录密码最多不能超过16个字符',
-            'admin_password.confirm'   => '登录密码和确认密码不一致',
+            'admin_password.max' => '登录密码最多不能超过16个字符',
+            'admin_password.confirm' => '登录密码和确认密码不一致',
         ]);
 
         if (!$validate->check($data)) {
@@ -150,13 +153,14 @@ class Adminer extends AbstractController
     public function delete(Request $request)
     {
         try {
-            if ($request->get('id') == 1) {
-                throw new \Exception("该账号不能删除");
+            if (1 == $request->get('id')) {
+                throw new \Exception('该账号不能删除');
             }
             $this->adminer->destroy($request->get('id'));
         } catch (\Exception $e) {
             return $this->error($e->getMessage());
         }
+
         return $this->success('删除成功');
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace techadmin\service\auth\contract;
 
 interface Authenticate

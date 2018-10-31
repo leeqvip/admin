@@ -1,11 +1,11 @@
 <?php
+
 namespace techadmin\controller;
 
 use techadmin\model\Category;
 use techadmin\model\Single as SingleModel;
 use techadmin\service\upload\contract\Factory as Uploader;
 use techadmin\support\controller\AbstractController;
-use think\Controller;
 use think\Request;
 
 class Single extends AbstractController
@@ -25,7 +25,7 @@ class Single extends AbstractController
         $articles = $this->single
             ->where('type', 1)
             ->when($data['keywords'], function ($query) use ($data) {
-                $query->whereLike('title', '%' . $data['keywords'] . '%');
+                $query->whereLike('title', '%'.$data['keywords'].'%');
             })
             ->when($data['category_id'], function ($query) use ($data) {
                 $query->whereIn('category_id', $data['category_id']);
@@ -36,9 +36,10 @@ class Single extends AbstractController
                 'query' => $data,
             ]);
         $parents = $category->flatTree();
+
         return $this->fetch('single/index', [
             'articles' => $articles,
-            'parents'  => $parents,
+            'parents' => $parents,
         ]);
     }
 
@@ -46,6 +47,7 @@ class Single extends AbstractController
     {
         $article = $this->single->find($request->get('id', 0));
         $parents = $category->flatTree();
+
         return $this->fetch('single/edit', [
             'article' => $article,
             'parents' => $parents,
@@ -65,7 +67,7 @@ class Single extends AbstractController
             })->count();
 
             if ($hasBinding) {
-                throw new \Exception("该栏目已经绑定其他单页");
+                throw new \Exception('该栏目已经绑定其他单页');
             }
 
             $this->single->isUpdate($request->get('id') > 0)->save($data);
@@ -82,6 +84,7 @@ class Single extends AbstractController
         } catch (\Exception $e) {
             return $this->error('删除失败');
         }
+
         return $this->success('删除成功');
     }
 }

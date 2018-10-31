@@ -1,9 +1,9 @@
 <?php
+
 namespace techadmin\controller;
 
 use techadmin\model\LinkBlock as LinkBlockModel;
 use techadmin\support\controller\AbstractController;
-use think\Controller;
 use think\Request;
 
 class LinkBlock extends AbstractController
@@ -19,6 +19,7 @@ class LinkBlock extends AbstractController
     public function index(Request $request)
     {
         $blocks = $this->model->paginate();
+
         return $this->fetch('link/block/index', [
             'blocks' => $blocks,
         ]);
@@ -52,6 +53,7 @@ class LinkBlock extends AbstractController
         } catch (\Exception $e) {
             return $this->error('删除失败');
         }
+
         return $this->success('删除成功');
     }
 }

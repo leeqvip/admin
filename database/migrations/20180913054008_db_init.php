@@ -5,7 +5,8 @@ use Phinx\Migration\AbstractMigration;
 
 class DbInit extends AbstractMigration
 {
-    protected $tablePrefix='';
+    protected $tablePrefix = '';
+
     /**
      * Migrate Up.
      */
@@ -309,8 +310,6 @@ INSERT INTO `techadmin_roles` VALUES ('1', '超级管理员', '2018-09-20 16:14:
 INSERT INTO `techadmin_roles_permissions` VALUES ('1', '1');
 INSERT INTO `techadmin_adminers_roles` VALUES ('1', '1');
 EOT
-
-
             );
     }
 

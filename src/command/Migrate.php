@@ -4,9 +4,6 @@ namespace techadmin\command;
 
 use think\migration\command\migrate\Run as MigrateRun;
 
-/**
- *
- */
 class Migrate extends MigrateRun
 {
     /**
@@ -20,6 +17,6 @@ class Migrate extends MigrateRun
 
     protected function getPath()
     {
-        return __DIR__ . '/../../database/migrations';
+        return __DIR__.'/../../database/migrations';
     }
 }

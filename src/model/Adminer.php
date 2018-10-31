@@ -1,11 +1,9 @@
 <?php
+
 namespace techadmin\model;
 
 use techadmin\service\auth\contract\Authenticate;
 
-/**
- *
- */
 class Adminer extends Model implements Authenticate
 {
     protected $table = 'techadmin_adminers';
@@ -26,6 +24,7 @@ class Adminer extends Model implements Authenticate
         foreach ($credentials as $key => $value) {
             $query->where($key, $value);
         }
+
         return $query->find();
     }
 

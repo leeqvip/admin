@@ -1,9 +1,7 @@
 <?php
+
 namespace techadmin\model;
 
-/**
- *
- */
 class Article extends Model
 {
     protected $table = 'techadmin_articles';
@@ -16,6 +14,7 @@ class Article extends Model
         if (empty($summary)) {
             $summary = strip_tags($this->getAttr('content'));
         }
+
         return $summary;
     }
 
@@ -29,6 +28,7 @@ class Article extends Model
             ->where('category_id', 'eq', $this->category_id)
             ->order(['sort' => 'asc', 'updated_at' => 'desc', 'id' => 'desc'])
             ->find();
+
         return $prev;
     }
 
@@ -41,6 +41,7 @@ class Article extends Model
             ->where('category_id', 'eq', $this->category_id)
             ->order(['sort' => 'desc', 'updated_at' => 'asc', 'id' => 'asc'])
             ->find();
+
         return $next;
     }
 

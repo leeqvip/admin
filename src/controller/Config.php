@@ -1,9 +1,9 @@
 <?php
+
 namespace techadmin\controller;
 
 use techadmin\model\Config as ConfigModel;
 use techadmin\support\controller\AbstractController;
-use think\Controller;
 use think\Request;
 
 class Config extends AbstractController
@@ -19,6 +19,7 @@ class Config extends AbstractController
     public function index()
     {
         $configs = $this->config->select();
+
         return $this->fetch('config/index', [
             'configs' => $configs,
         ]);

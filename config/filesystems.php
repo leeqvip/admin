@@ -1,6 +1,6 @@
 <?php
-return [
 
+return [
     // 默认的文件存储磁盘
     'default' => 'local',
 
@@ -17,12 +17,11 @@ return [
     |
      */
 
-    'disks'   => [
+    'disks' => [
         'local' => [
             'driver' => 'local',
-            'root'   => public_path('uploads/'),
-            'url'    => '/uploads/',
+            'root' => public_path('uploads/'),
+            'url' => '/uploads/',
         ],
     ],
-
 ];
