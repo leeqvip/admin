@@ -29,6 +29,7 @@ class OperationLog extends Model
         ];
         foreach ($regex as $type => $reg) {
             preg_match($reg, $agent, $data);
+
             if (!empty($data) && \is_array($data)) {
                 $browser = 'safari' === $type ? [$data[2], $data[1]] : [$data[1], $data[2]];
                 break;
