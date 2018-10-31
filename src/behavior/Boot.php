@@ -79,7 +79,7 @@ class Boot
     {
         if (is_file(admin_config_path('middleware.php'))) {
             $middleware = require_once admin_config_path('/middleware.php');
-            if (is_array($middleware)) {
+            if (\is_array($middleware)) {
                 $this->app->middleware->setConfig($middleware);
             }
         }
@@ -105,7 +105,7 @@ class Boot
                 // 导入路由配置
                 Route::group($this->name, function () use ($filename) {
                     $rules = include_once $filename;
-                    if (is_array($rules)) {
+                    if (\is_array($rules)) {
                         $this->app->route->import($rules);
                     }
                 })->prefix($this->namespace);
@@ -115,7 +115,7 @@ class Boot
 
     public function initConsole()
     {
-        if (!('cli' === php_sapi_name() || 'phpdbg' === php_sapi_name())) {
+        if (!('cli' === \PHP_SAPI || 'phpdbg' === \PHP_SAPI)) {
             return;
         }
     }

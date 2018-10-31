@@ -23,7 +23,7 @@ class PermissionCheck
 
         $allPermissions = $adminer->roles()->with('permissions')->select()->column('permissions');
 
-        foreach ($allPermissions as $key => $permission) {
+        foreach ($allPermissions as $permission) {
             if (isset($permissions)) {
                 $permissions = $permission->merge($permissions);
             } else {
@@ -41,7 +41,7 @@ class PermissionCheck
     public function permissionCheck($permission)
     {
         if ($permission instanceof Collection) {
-            foreach ($permission as $key => $permission) {
+            foreach ($permission as $permission) {
                 if ($this->permissionCheck($permission)) {
                     return true;
                 }
@@ -115,7 +115,7 @@ class PermissionCheck
     public function startsWith($haystack, $needles)
     {
         foreach ((array) $needles as $needle) {
-            if ('' !== $needle && substr($haystack, 0, strlen($needle)) === (string) $needle) {
+            if ('' !== $needle && substr($haystack, 0, \strlen($needle)) === (string) $needle) {
                 return true;
             }
         }
@@ -126,7 +126,7 @@ class PermissionCheck
     public static function endsWith($haystack, $needles)
     {
         foreach ((array) $needles as $needle) {
-            if (substr($haystack, -strlen($needle)) === (string) $needle) {
+            if (substr($haystack, -\strlen($needle)) === (string) $needle) {
                 return true;
             }
         }

@@ -48,7 +48,7 @@ class Role extends AbstractController
 
             $newPermissionsIds = $request->post('permission_id', []);
             $newPermissionsIds = array_map(function ($item) {
-                return intval($item);
+                return (int) $item;
             }, $newPermissionsIds);
             if (!empty($permissionsIds)) {
                 $detachPermissionsIds = array_diff(

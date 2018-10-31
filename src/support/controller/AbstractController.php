@@ -30,7 +30,7 @@ abstract class AbstractController extends Controller
             $config = Container::get('config');
             $paginate = $config->pull('paginate');
             $config->set(array_merge(
-                is_array($paginate) ? $paginate : [],
+                \is_array($paginate) ? $paginate : [],
                 $paginateAdmin
             ), 'paginate');
         }

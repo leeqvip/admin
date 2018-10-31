@@ -42,13 +42,13 @@ class SessionGuard implements contract\Guard
 
     public function user()
     {
-        if (!is_null($this->user)) {
+        if (null !== $this->user) {
             return $this->user;
         }
 
         $authIdentifier = Session::get($this->getName());
 
-        if (!is_null($authIdentifier)) {
+        if (null !== $authIdentifier) {
             $this->user = $this->authenticate->retrieveByIdentifier($authIdentifier);
         }
 

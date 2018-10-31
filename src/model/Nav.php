@@ -23,7 +23,7 @@ class Nav extends Model
             '_parent' => '父级框架',
             '_top' => '整个窗口',
         ];
-        if (is_null($target)) {
+        if (null === $target) {
             return $map;
         }
 

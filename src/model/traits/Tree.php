@@ -28,7 +28,7 @@ trait Tree
 
     public function getChildrenNodes($parentId, $tree = null)
     {
-        if (is_null($tree)) {
+        if (null === $tree) {
             $tree = $this->toTree();
         }
 

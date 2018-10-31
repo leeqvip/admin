@@ -6,9 +6,6 @@ use think\migration\command\migrate\Run as MigrateRun;
 
 class Migrate extends MigrateRun
 {
-    /**
-     * {@inheritdoc}
-     */
     protected function configure()
     {
         parent::configure();

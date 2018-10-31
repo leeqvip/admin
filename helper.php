@@ -37,7 +37,7 @@ function site_config($key)
     return Config::get($key);
 }
 
-if ('cli' === php_sapi_name() || 'phpdbg' === php_sapi_name()) {
+if ('cli' === PHP_SAPI || 'phpdbg' === PHP_SAPI) {
     \think\Console::addDefaultCommands([
         'techadmin:init' => \techadmin\command\Init::class,
         'techadmin:migrate:run' => \techadmin\command\Migrate::class,

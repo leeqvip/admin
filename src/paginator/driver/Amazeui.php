@@ -80,16 +80,16 @@ class Amazeui extends Paginator
 
         $html = '';
 
-        if (is_array($block['first'])) {
+        if (\is_array($block['first'])) {
             $html .= $this->getUrlLinks($block['first']);
         }
 
-        if (is_array($block['slider'])) {
+        if (\is_array($block['slider'])) {
             $html .= $this->getDots();
             $html .= $this->getUrlLinks($block['slider']);
         }
 
-        if (is_array($block['last'])) {
+        if (\is_array($block['last'])) {
             $html .= $this->getDots();
             $html .= $this->getUrlLinks($block['last']);
         }

@@ -61,7 +61,7 @@ class Adminer extends AbstractController
         $roleIds = $adminer->roles()->column('id');
 
         $newRoleIds = array_map(function ($item) {
-            return intval($item);
+            return (int) $item;
         }, $newRoleIds);
         if (!empty($roleIds)) {
             $detachRoleIds = array_diff(

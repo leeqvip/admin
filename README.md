@@ -1,4 +1,11 @@
-# TechAdmin 
+TechAdmin
+
+===============
+
+[![StyleCI](https://github.styleci.io/repos/149270146/shield?style=plastic&branch=master)](https://github.styleci.io/repos/149270146)
+[![Latest Stable Version](https://poser.pugx.org/techone/admin/v/stable)](https://packagist.org/packages/techone/admin)
+[![Total Downloads](https://poser.pugx.org/techone/admin/downloads)](https://packagist.org/packages/techone/admin)
+[![License](https://poser.pugx.org/techone/admin/license)](https://packagist.org/packages/techone/admin)
 
 ## Intro
 
@@ -41,6 +48,3 @@ return [
 打开后台地址，例如：
 
 http://yourdomain/admin
-
-
-

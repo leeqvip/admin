@@ -28,7 +28,7 @@ class Category extends Model
             'single' => '单页',
             'topic' => '专题',
         ];
-        if (is_null($type)) {
+        if (null === $type) {
             return $map;
         }
 
