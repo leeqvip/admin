@@ -9,5 +9,4 @@ class Menu extends Model
     use traits\Tree;
 
     protected $table = 'techadmin_menus';
-
 }

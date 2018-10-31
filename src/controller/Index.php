@@ -21,7 +21,6 @@ class Index extends AbstractController
 
     public function index(OperationLog $operationLog)
     {
-
         return $this->fetch('index/index', [
             'logs'          => $this->logs(),
             'systemInfo'    => $this->systemInfo(),

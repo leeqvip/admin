@@ -7,7 +7,6 @@ use think\Controller;
 
 class Log extends AbstractController
 {
-
     protected $operationLog;
 
     public function __construct(OperationLog $operationLog)

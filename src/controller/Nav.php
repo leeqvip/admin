@@ -8,7 +8,6 @@ use think\Request;
 
 class Nav extends AbstractController
 {
-
     protected $model;
 
     public function __construct(NavModel $model)
@@ -43,11 +42,9 @@ class Nav extends AbstractController
     public function save(Request $request)
     {
         try {
-
             $data = $request->post();
 
             $res = $this->model->isUpdate($request->get('id') > 0)->save($data);
-
         } catch (\Exception $e) {
             $this->error('保存失败');
         }

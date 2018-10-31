@@ -10,7 +10,6 @@ use think\Request;
 
 class Single extends AbstractController
 {
-
     protected $single;
 
     public function __construct(SingleModel $single)
@@ -70,7 +69,6 @@ class Single extends AbstractController
             }
 
             $this->single->isUpdate($request->get('id') > 0)->save($data);
-
         } catch (\Exception $e) {
             $this->error($e->getMessage());
         }

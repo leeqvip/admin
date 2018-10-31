@@ -7,7 +7,6 @@ use think\Request;
 
 class Message extends AbstractController
 {
-
     protected $model;
 
     public function __construct(MessageBoard $model)

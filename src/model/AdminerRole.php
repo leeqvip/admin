@@ -11,5 +11,4 @@ class AdminerRole extends Pivot
     use traits\ModelHelper;
 
     protected $table = 'techadmin_adminers_roles';
-
 }

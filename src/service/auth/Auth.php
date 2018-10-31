@@ -83,5 +83,4 @@ class Auth implements contract\Auth
     {
         return password_verify($credentials['admin_password'], $adminer->admin_password);
     }
-
 }

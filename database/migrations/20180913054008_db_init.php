@@ -6,13 +6,13 @@ use Phinx\Migration\AbstractMigration;
 class DbInit extends AbstractMigration
 {
     protected $tablePrefix='';
-        /**
+    /**
      * Migrate Up.
      */
     public function up()
     {
-        if($this->getAdapter()->hasOption('table_prefix')){
-            $this->tablePrefix = $this->getAdapter()->getOption('table_prefix');            
+        if ($this->getAdapter()->hasOption('table_prefix')) {
+            $this->tablePrefix = $this->getAdapter()->getOption('table_prefix');
         }
 
         $this->execute(<<<EOT
@@ -311,7 +311,7 @@ INSERT INTO `techadmin_adminers_roles` VALUES ('1', '1');
 EOT
 
 
-            ); 
+            );
     }
 
     /**
@@ -319,8 +319,5 @@ EOT
      */
     public function down()
     {
-
     }
-
-
 }

@@ -9,7 +9,6 @@ use think\Request;
 
 class Role extends AbstractController
 {
-
     protected $role;
 
     public function __construct(RoleModel $role)
@@ -58,7 +57,6 @@ class Role extends AbstractController
                     $newPermissionsIds,
                     array_intersect($permissionsIds, $newPermissionsIds)
                 );
-
             } else {
                 $attachPermissionsIds = $newPermissionsIds;
             }
@@ -70,7 +68,6 @@ class Role extends AbstractController
             if (isset($detachPermissionsIds) && !empty($detachPermissionsIds)) {
                 $role->permissions()->detach(array_values($detachPermissionsIds));
             }
-
         } catch (\Exception $e) {
             $this->error('保存失败');
         }

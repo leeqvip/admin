@@ -42,7 +42,6 @@ class Passport extends AbstractController
             $this->auth->login($request);
 
             return redirect('techadmin.index');
-
         } catch (\Exception $e) {
             $this->error($e->getMessage());
         }

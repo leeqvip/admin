@@ -15,7 +15,6 @@ use think\Loader;
  */
 class Init extends Command
 {
-
     protected function configure()
     {
         $this->setName('techadmin:init')->setDescription('init techadmin');

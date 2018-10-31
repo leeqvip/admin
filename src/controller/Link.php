@@ -10,7 +10,6 @@ use think\Request;
 
 class Link extends AbstractController
 {
-
     protected $model;
 
     public function __construct(LinkModel $model)
@@ -61,7 +60,6 @@ class Link extends AbstractController
             }
 
             $this->model->isUpdate($request->get('id') > 0)->save($data);
-
         } catch (\Exception $e) {
             $this->error($e->getMessage());
         }

@@ -8,7 +8,6 @@ use think\Request;
 
 class LinkBlock extends AbstractController
 {
-
     protected $model;
 
     public function __construct(LinkBlockModel $model)
@@ -40,7 +39,6 @@ class LinkBlock extends AbstractController
             $data = $request->post();
 
             $this->model->isUpdate($request->get('id') > 0)->save($data);
-
         } catch (\Exception $e) {
             $this->error($e->getMessage());
         }

@@ -12,7 +12,6 @@ use think\Request;
 
 class Article extends AbstractController
 {
-
     protected $article;
 
     protected $category;
@@ -92,7 +91,6 @@ class Article extends AbstractController
                 ], true, true);
             }
             ArticleTag::where('article_id', $article->id)->whereNotIn('tag_id', $tags)->delete();
-
         } catch (\Exception $e) {
             $this->error($e->getMessage());
         }
