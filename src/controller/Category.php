@@ -8,7 +8,6 @@ use think\Request;
 
 class Category extends AbstractController
 {
-
     protected $category;
 
     public function __construct(CategoryModel $category)
@@ -40,7 +39,6 @@ class Category extends AbstractController
     public function save(Request $request)
     {
         try {
-
             $data = $request->post();
 
             if (!empty($data['parent_id'])) {
@@ -53,7 +51,6 @@ class Category extends AbstractController
             $data['parent_path'] = isset($parent) ? $parent['parent_path'] . $parent['id'] . ',' : '0,';
 
             $res = $this->category->isUpdate($request->get('id') > 0)->save($data);
-
         } catch (\Exception $e) {
             $this->error('保存失败');
         }

@@ -18,6 +18,5 @@ class Config extends Model
         self::$configs = self::column('value', 'key');
 
         return isset(self::$configs[$key]) ? self::$configs[$key] : '';
-
     }
 }

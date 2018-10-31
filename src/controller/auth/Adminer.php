@@ -12,7 +12,6 @@ use think\Request;
 
 class Adminer extends AbstractController
 {
-
     protected $adminer;
 
     public function __construct(AdminerModel $adminer)
@@ -50,7 +49,6 @@ class Adminer extends AbstractController
             }
 
             $this->updateRoles($adminer, $request->post('role_id', []));
-
         } catch (\Exception $e) {
             $this->error($e->getMessage());
         }
@@ -73,7 +71,6 @@ class Adminer extends AbstractController
                 $newRoleIds,
                 array_intersect($roleIds, $newRoleIds)
             );
-
         } else {
             $attachRoleIds = $newRoleIds;
         }

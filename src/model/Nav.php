@@ -30,5 +30,4 @@ class Nav extends Model
         }
         return isset($map[$target]) ? $map[$target] : '';
     }
-
 }

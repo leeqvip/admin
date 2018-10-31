@@ -8,7 +8,6 @@ use think\Request;
 
 class AdvertisingBlock extends AbstractController
 {
-
     protected $model;
 
     public function __construct(AdvertisingBlockModel $model)
@@ -40,7 +39,6 @@ class AdvertisingBlock extends AbstractController
             $data = $request->post();
 
             $this->model->isUpdate($request->get('id') > 0)->save($data);
-
         } catch (\Exception $e) {
             $this->error($e->getMessage());
         }

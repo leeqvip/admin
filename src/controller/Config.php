@@ -27,7 +27,6 @@ class Config extends AbstractController
     public function save(Request $request)
     {
         try {
-
             $this->config->saveAll(array_values($request->post('config/a')));
         } catch (\Exception $e) {
             return $this->error('保存失败');
@@ -44,7 +43,6 @@ class Config extends AbstractController
     {
         try {
             $this->config->create($request->post());
-
         } catch (\Exception $e) {
             return $this->error('保存失败');
         }

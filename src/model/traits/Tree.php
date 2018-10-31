@@ -82,7 +82,6 @@ trait Tree
         }
         foreach ($nodes as $node) {
             if ($node[$this->parentColumn] == $parentId) {
-
                 $children = $this->buildNestedArray($nodes, $node[$this->pk], $depth + 1);
 
                 if ($children) {

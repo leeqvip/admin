@@ -6,7 +6,6 @@ use think\App;
 
 class Uploader extends Manager implements contract\Factory
 {
-
     protected $app;
 
     protected $filesystems = [

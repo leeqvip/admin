@@ -8,7 +8,6 @@ use think\Request;
 
 class Permission extends AbstractController
 {
-
     protected $permission;
 
     public function __construct(PermissionModel $permission)
@@ -39,7 +38,6 @@ class Permission extends AbstractController
             $data = $request->post();
 
             $res = $this->permission->isUpdate($request->get('id') > 0)->save($data);
-
         } catch (\Exception $e) {
             $this->error('保存失败');
         }

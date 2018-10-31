@@ -59,12 +59,10 @@ class PermissionCheck
             }
         }
         return false;
-
     }
 
     protected function checkHttpPath($httpPath, $currentPath)
     {
-
         if (!$this->endsWith($httpPath, '*')) {
             if ($httpPath == $currentPath) {
                 return true;

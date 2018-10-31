@@ -75,7 +75,6 @@ class Boot
 
     protected function importMiddleware()
     {
-
         if (is_file(admin_config_path('middleware.php'))) {
             $middleware = require_once admin_config_path('/middleware.php');
             if (is_array($middleware)) {

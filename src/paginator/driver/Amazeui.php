@@ -14,7 +14,6 @@ class Amazeui extends Paginator
      */
     protected function getPreviousButton($text = "&laquo;")
     {
-
         if ($this->currentPage() <= 1) {
             return $this->getDisabledTextWrapper($text);
         }

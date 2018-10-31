@@ -18,7 +18,6 @@ class LogRecord
 
     public function handle($request, \Closure $next)
     {
-
         $this->createLog($request);
         return $next($request);
     }
