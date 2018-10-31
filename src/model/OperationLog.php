@@ -32,6 +32,7 @@ class OperationLog extends Model
 
             if (!empty($data) && \is_array($data)) {
                 $browser = 'safari' === $type ? [$data[2], $data[1]] : [$data[1], $data[2]];
+
                 break;
             }
         }
