@@ -1,7 +1,6 @@
 <?php
-namespace techadmin\service\auth\guard\traits;
 
-use techadmin\service\auth\contract\Authenticate;
+namespace techadmin\service\auth\guard\traits;
 
 trait GuardHelper
 {

@@ -1,9 +1,7 @@
 <?php
+
 namespace techadmin\model;
 
-/**
- *
- */
 class Single extends Model
 {
     protected $table = 'techadmin_single';
@@ -16,6 +14,7 @@ class Single extends Model
         if (empty($summary)) {
             $summary = strip_tags($this->getAttr('content'));
         }
+
         return $summary;
     }
 

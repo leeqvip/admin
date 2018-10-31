@@ -1,10 +1,10 @@
 <?php
+
 namespace techadmin\controller;
 
 use techadmin\model\Article;
 use techadmin\model\OperationLog;
 use techadmin\support\controller\AbstractController;
-use think\Controller;
 
 class Index extends AbstractController
 {
@@ -16,15 +16,14 @@ class Index extends AbstractController
     {
         parent::__construct();
         $this->operationLog = $operationLog;
-        $this->article      = $article;
+        $this->article = $article;
     }
 
     public function index(OperationLog $operationLog)
     {
-
         return $this->fetch('index/index', [
-            'logs'          => $this->logs(),
-            'systemInfo'    => $this->systemInfo(),
+            'logs' => $this->logs(),
+            'systemInfo' => $this->systemInfo(),
             'latestRelease' => $this->latestRelease(),
         ]);
     }
@@ -37,11 +36,11 @@ class Index extends AbstractController
     protected function systemInfo()
     {
         return [
-            'appVersion'     => '0.1.0',
-            'os'             => PHP_OS,
+            'appVersion' => '0.1.0',
+            'os' => PHP_OS,
             'serverSoftware' => request()->server('SERVER_SOFTWARE'),
-            'phpVersion'     => 'PHP ' . PHP_VERSION,
-            'systemDate'     => date('Y年m月d日 H时i分s秒') . ' (' . date_default_timezone_get() . ')',
+            'phpVersion' => 'PHP '.PHP_VERSION,
+            'systemDate' => date('Y年m月d日 H时i分s秒').' ('.date_default_timezone_get().')',
         ];
     }
 

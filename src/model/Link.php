@@ -1,12 +1,9 @@
 <?php
+
 namespace techadmin\model;
 
-/**
- *
- */
 class Link extends Model
 {
-
     protected $table = 'techadmin_links';
 
     public function linkBlock()

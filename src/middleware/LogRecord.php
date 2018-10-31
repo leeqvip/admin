@@ -1,12 +1,10 @@
 <?php
+
 namespace techadmin\middleware;
 
 use techadmin\model\OperationLog;
 use techadmin\service\auth\facade\Auth;
 
-/**
- *
- */
 class LogRecord
 {
     protected $operationLog;
@@ -18,8 +16,8 @@ class LogRecord
 
     public function handle($request, \Closure $next)
     {
-
         $this->createLog($request);
+
         return $next($request);
     }
 
@@ -28,11 +26,11 @@ class LogRecord
         $adminer = Auth::user();
         $this->operationLog->create([
             'adminer_id' => $adminer ? $adminer->id : 0,
-            'path'       => $request->path(),
-            'method'     => $request->method(),
-            'ip'         => $request->ip(),
-            'input'      => var_export($request->param(), true),
-            'useragent'  => $request->header('User-Agent'),
+            'path' => $request->path(),
+            'method' => $request->method(),
+            'ip' => $request->ip(),
+            'input' => var_export($request->param(), true),
+            'useragent' => $request->header('User-Agent'),
         ]);
     }
 }

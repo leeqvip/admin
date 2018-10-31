@@ -10,12 +10,8 @@ use think\console\Input;
 use think\console\Output;
 use think\Loader;
 
-/**
- *
- */
 class Init extends Command
 {
-
     protected function configure()
     {
         $this->setName('techadmin:init')->setDescription('init techadmin');
@@ -29,10 +25,10 @@ class Init extends Command
     protected function publishAssets()
     {
         $source = new Filesystem(
-            new Local(__DIR__ . '/../../resource/assets')
+            new Local(__DIR__.'/../../resource/assets')
         );
         $traget = new Filesystem(
-            new Local(Loader::getRootPath() . 'public/vendor/techadmin/assets')
+            new Local(Loader::getRootPath().'public/vendor/techadmin/assets')
         );
 
         $manager = new MountManager([
@@ -45,14 +41,14 @@ class Init extends Command
         foreach ($contents as $entry) {
             $update = false;
 
-            if (!$manager->has('traget://' . $entry['path'])) {
+            if (!$manager->has('traget://'.$entry['path'])) {
                 $update = true;
-            } elseif ($manager->getTimestamp('source://' . $entry['path']) > $manager->getTimestamp('traget://' . $entry['path'])) {
+            } elseif ($manager->getTimestamp('source://'.$entry['path']) > $manager->getTimestamp('traget://'.$entry['path'])) {
                 $update = true;
             }
 
-            if ($entry['type'] === 'file' && $update) {
-                $manager->put('traget://' . $entry['path'], $manager->read('source://' . $entry['path']));
+            if ('file' === $entry['type'] && $update) {
+                $manager->put('traget://'.$entry['path'], $manager->read('source://'.$entry['path']));
             }
         }
     }

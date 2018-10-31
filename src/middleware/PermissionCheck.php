@@ -1,12 +1,10 @@
 <?php
+
 namespace techadmin\middleware;
 
 use techadmin\service\auth\facade\Auth;
 use think\model\Collection;
 
-/**
- *
- */
 class PermissionCheck
 {
     protected $request;
@@ -34,7 +32,7 @@ class PermissionCheck
         }
 
         if (!$this->permissionCheck($permissions)) {
-            throw new \Exception("权限不足");
+            throw new \Exception('权限不足');
         }
 
         return $next($request);
@@ -58,13 +56,12 @@ class PermissionCheck
                 return true;
             }
         }
-        return false;
 
+        return false;
     }
 
     protected function checkHttpPath($httpPath, $currentPath)
     {
-
         if (!$this->endsWith($httpPath, '*')) {
             if ($httpPath == $currentPath) {
                 return true;
@@ -74,6 +71,7 @@ class PermissionCheck
                 return true;
             }
         }
+
         return false;
     }
 
@@ -86,7 +84,7 @@ class PermissionCheck
         ];
 
         foreach ($excepts as $except) {
-            if ($except !== '/') {
+            if ('/' !== $except) {
                 $except = trim($except, '/');
             }
             if ($except == $this->parseCurrentPath()) {
@@ -100,9 +98,10 @@ class PermissionCheck
     public function parseCurrentPath()
     {
         $currentPath = ltrim(trim($this->request->path(), '/'), 'admin');
-        if ($currentPath !== '/') {
+        if ('/' !== $currentPath) {
             $currentPath = rtrim($currentPath, '/');
         }
+
         return $currentPath;
     }
 
@@ -116,7 +115,7 @@ class PermissionCheck
     public function startsWith($haystack, $needles)
     {
         foreach ((array) $needles as $needle) {
-            if ($needle !== '' && substr($haystack, 0, strlen($needle)) === (string) $needle) {
+            if ('' !== $needle && substr($haystack, 0, strlen($needle)) === (string) $needle) {
                 return true;
             }
         }

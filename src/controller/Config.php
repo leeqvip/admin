@@ -1,9 +1,9 @@
 <?php
+
 namespace techadmin\controller;
 
 use techadmin\model\Config as ConfigModel;
 use techadmin\support\controller\AbstractController;
-use think\Controller;
 use think\Request;
 
 class Config extends AbstractController
@@ -19,6 +19,7 @@ class Config extends AbstractController
     public function index()
     {
         $configs = $this->config->select();
+
         return $this->fetch('config/index', [
             'configs' => $configs,
         ]);
@@ -27,7 +28,6 @@ class Config extends AbstractController
     public function save(Request $request)
     {
         try {
-
             $this->config->saveAll(array_values($request->post('config/a')));
         } catch (\Exception $e) {
             return $this->error('保存失败');
@@ -44,7 +44,6 @@ class Config extends AbstractController
     {
         try {
             $this->config->create($request->post());
-
         } catch (\Exception $e) {
             return $this->error('保存失败');
         }

@@ -1,4 +1,5 @@
 <?php
+
 namespace techadmin\controller;
 
 use techadmin\model\MessageBoard;
@@ -7,7 +8,6 @@ use think\Request;
 
 class Message extends AbstractController
 {
-
     protected $model;
 
     public function __construct(MessageBoard $model)
@@ -22,12 +22,13 @@ class Message extends AbstractController
 
         $messages = $this->model
             ->when($data['keywords'], function ($query) use ($data) {
-                $query->whereLike('title', '%' . $data['keywords'] . '%');
+                $query->whereLike('title', '%'.$data['keywords'].'%');
             })
             ->order('id', 'desc')
             ->paginate([
                 'query' => $data,
             ]);
+
         return $this->fetch('message/index', [
             'messages' => $messages,
         ]);
@@ -40,6 +41,7 @@ class Message extends AbstractController
         } catch (\Exception $e) {
             return $this->error('删除失败');
         }
+
         return $this->success('删除成功');
     }
 }

@@ -1,15 +1,14 @@
 <?php
+
 namespace techadmin\controller\auth;
 
 use techadmin\model\Permission;
 use techadmin\model\Role as RoleModel;
 use techadmin\support\controller\AbstractController;
-use think\Controller;
 use think\Request;
 
 class Role extends AbstractController
 {
-
     protected $role;
 
     public function __construct(RoleModel $role)
@@ -21,6 +20,7 @@ class Role extends AbstractController
     public function index()
     {
         $roles = $this->role->with('permissions')->paginate();
+
         return $this->fetch('auth/role/index', [
             'roles' => $roles,
         ]);
@@ -28,12 +28,13 @@ class Role extends AbstractController
 
     public function edit(Request $request, Permission $permission)
     {
-        $role           = $this->role->find($request->get('id', 0));
-        $permissions    = $permission->select();
+        $role = $this->role->find($request->get('id', 0));
+        $permissions = $permission->select();
         $permissionsIds = $role ? $role->permissions()->column('id') : [];
+
         return $this->fetch('auth/role/edit', [
-            'role'           => $role,
-            'permissions'    => $permissions,
+            'role' => $role,
+            'permissions' => $permissions,
             'permissionsIds' => $permissionsIds,
         ]);
     }
@@ -41,8 +42,8 @@ class Role extends AbstractController
     public function save(Request $request)
     {
         try {
-            $data           = $request->post();
-            $role           = $this->role->create($data, true, true);
+            $data = $request->post();
+            $role = $this->role->create($data, true, true);
             $permissionsIds = $role->permissions()->column('id');
 
             $newPermissionsIds = $request->post('permission_id', []);
@@ -58,7 +59,6 @@ class Role extends AbstractController
                     $newPermissionsIds,
                     array_intersect($permissionsIds, $newPermissionsIds)
                 );
-
             } else {
                 $attachPermissionsIds = $newPermissionsIds;
             }
@@ -70,7 +70,6 @@ class Role extends AbstractController
             if (isset($detachPermissionsIds) && !empty($detachPermissionsIds)) {
                 $role->permissions()->detach(array_values($detachPermissionsIds));
             }
-
         } catch (\Exception $e) {
             $this->error('保存失败');
         }
@@ -84,6 +83,7 @@ class Role extends AbstractController
         } catch (\Exception $e) {
             return $this->error('删除失败');
         }
+
         return $this->success('删除成功');
     }
 }

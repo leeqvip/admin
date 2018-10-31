@@ -1,14 +1,13 @@
 <?php
+
 namespace techadmin\controller;
 
 use techadmin\model\AdvertisingBlock as AdvertisingBlockModel;
 use techadmin\support\controller\AbstractController;
-use think\Controller;
 use think\Request;
 
 class AdvertisingBlock extends AbstractController
 {
-
     protected $model;
 
     public function __construct(AdvertisingBlockModel $model)
@@ -20,6 +19,7 @@ class AdvertisingBlock extends AbstractController
     public function index(Request $request)
     {
         $blocks = $this->model->paginate();
+
         return $this->fetch('advertising/block/index', [
             'blocks' => $blocks,
         ]);
@@ -40,7 +40,6 @@ class AdvertisingBlock extends AbstractController
             $data = $request->post();
 
             $this->model->isUpdate($request->get('id') > 0)->save($data);
-
         } catch (\Exception $e) {
             $this->error($e->getMessage());
         }
@@ -54,6 +53,7 @@ class AdvertisingBlock extends AbstractController
         } catch (\Exception $e) {
             return $this->error('删除失败');
         }
+
         return $this->success('删除成功');
     }
 }

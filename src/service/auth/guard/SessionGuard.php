@@ -1,4 +1,5 @@
 <?php
+
 namespace techadmin\service\auth\guard;
 
 use techadmin\service\auth\contract\Authenticate;
@@ -36,7 +37,7 @@ class SessionGuard implements contract\Guard
 
     public function getName()
     {
-        return 'login_' . $this->name . '_' . sha1(static::class);
+        return 'login_'.$this->name.'_'.sha1(static::class);
     }
 
     public function user()
@@ -50,6 +51,7 @@ class SessionGuard implements contract\Guard
         if (!is_null($authIdentifier)) {
             $this->user = $this->authenticate->retrieveByIdentifier($authIdentifier);
         }
+
         return $this->user;
     }
 }

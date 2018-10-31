@@ -1,16 +1,15 @@
 <?php
+
 namespace techadmin\controller;
 
 use techadmin\model\Advertising as AdvertisingModel;
 use techadmin\model\AdvertisingBlock;
 use techadmin\service\upload\contract\Factory as Uploader;
 use techadmin\support\controller\AbstractController;
-use think\Controller;
 use think\Request;
 
 class Advertising extends AbstractController
 {
-
     protected $model;
 
     public function __construct(AdvertisingModel $model)
@@ -25,7 +24,7 @@ class Advertising extends AbstractController
 
         $advertisings = $this->model
             ->when($data['keywords'], function ($query) use ($data) {
-                $query->whereLike('title', '%' . $data['keywords'] . '%');
+                $query->whereLike('title', '%'.$data['keywords'].'%');
             })
             ->when($data['block'], function ($query) use ($data) {
                 $query->whereIn('block', $data['block']);
@@ -36,19 +35,21 @@ class Advertising extends AbstractController
                 'query' => $data,
             ]);
         $adBlocks = $adBlock->select();
+
         return $this->fetch('advertising/index', [
             'advertisings' => $advertisings,
-            'adBlocks'     => $adBlocks,
+            'adBlocks' => $adBlocks,
         ]);
     }
 
     public function edit(Request $request, AdvertisingBlock $adBlock)
     {
         $advertising = $this->model->find($request->get('id', 0));
-        $adBlocks    = $adBlock->select();
+        $adBlocks = $adBlock->select();
+
         return $this->fetch('advertising/edit', [
             'advertising' => $advertising,
-            'adBlocks'    => $adBlocks,
+            'adBlocks' => $adBlocks,
         ]);
     }
 
@@ -61,7 +62,6 @@ class Advertising extends AbstractController
             }
 
             $this->model->isUpdate($request->get('id') > 0)->save($data);
-
         } catch (\Exception $e) {
             $this->error($e->getMessage());
         }
@@ -75,6 +75,7 @@ class Advertising extends AbstractController
         } catch (\Exception $e) {
             return $this->error('删除失败');
         }
+
         return $this->success('删除成功');
     }
 }

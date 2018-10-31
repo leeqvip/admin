@@ -1,4 +1,5 @@
 <?php
+
 namespace techadmin\controller;
 
 use techadmin\model\Article as ArticleModel;
@@ -7,12 +8,10 @@ use techadmin\model\Category;
 use techadmin\model\Tag;
 use techadmin\service\upload\contract\Factory as Uploader;
 use techadmin\support\controller\AbstractController;
-use think\Controller;
 use think\Request;
 
 class Article extends AbstractController
 {
-
     protected $article;
 
     protected $category;
@@ -20,7 +19,7 @@ class Article extends AbstractController
     public function __construct(ArticleModel $article, Category $category)
     {
         parent::__construct();
-        $this->article  = $article;
+        $this->article = $article;
         $this->category = $category;
     }
 
@@ -31,12 +30,12 @@ class Article extends AbstractController
         $articles = $this->article
             ->where('type', 1)
             ->when($data['keywords'], function ($query) use ($data) {
-                $query->whereLike('title', '%' . $data['keywords'] . '%');
+                $query->whereLike('title', '%'.$data['keywords'].'%');
             })
             ->when($data['category_id'], function ($query) use ($data) {
                 $query->whereIn('category_id', $data['category_id']);
                 foreach ($data['category_id'] as $value) {
-                    $query->whereOr('category_parent_path', 'like', '%,' . $value . ',%');
+                    $query->whereOr('category_parent_path', 'like', '%,'.$value.',%');
                 }
             })
             ->order('id', 'desc')
@@ -45,9 +44,10 @@ class Article extends AbstractController
                 'query' => $data,
             ]);
         $parents = $this->category->flatTree();
+
         return $this->fetch('article/index', [
             'articles' => $articles,
-            'parents'  => $parents,
+            'parents' => $parents,
         ]);
     }
 
@@ -55,12 +55,12 @@ class Article extends AbstractController
     {
         $article = $this->article->find($request->get('id', 0));
         $parents = $this->category->flatTree();
-        $tags    = $tag->select();
+        $tags = $tag->select();
 
         return $this->fetch('article/edit', [
             'article' => $article,
             'parents' => $parents,
-            'tags'    => $tags,
+            'tags' => $tags,
         ]);
     }
 
@@ -79,7 +79,7 @@ class Article extends AbstractController
                 }
             }
 
-            $data['category_parent_path'] = isset($parent) ? $parent['parent_path'] . $parent['id'] . ',' : '0,';
+            $data['category_parent_path'] = isset($parent) ? $parent['parent_path'].$parent['id'].',' : '0,';
 
             $tags = isset($data['tags']) ? $data['tags'] : [];
 
@@ -88,11 +88,10 @@ class Article extends AbstractController
             foreach ($tags as $tag) {
                 ArticleTag::create([
                     'article_id' => $article->id,
-                    'tag_id'     => $tag,
+                    'tag_id' => $tag,
                 ], true, true);
             }
             ArticleTag::where('article_id', $article->id)->whereNotIn('tag_id', $tags)->delete();
-
         } catch (\Exception $e) {
             $this->error($e->getMessage());
         }
@@ -106,6 +105,7 @@ class Article extends AbstractController
         } catch (\Exception $e) {
             return $this->error('删除失败');
         }
+
         return $this->success('删除成功');
     }
 }

@@ -1,14 +1,13 @@
 <?php
+
 namespace techadmin\controller;
 
 use techadmin\model\Nav as NavModel;
 use techadmin\support\controller\AbstractController;
-use think\Controller;
 use think\Request;
 
 class Nav extends AbstractController
 {
-
     protected $model;
 
     public function __construct(NavModel $model)
@@ -20,6 +19,7 @@ class Nav extends AbstractController
     public function index()
     {
         $navs = $this->model->flatTree();
+
         return $this->fetch('nav/index', [
             'navs' => $navs,
         ]);
@@ -34,7 +34,7 @@ class Nav extends AbstractController
         $targets = $this->model::mapTarget();
 
         return $this->fetch('nav/edit', [
-            'nav'     => $nav,
+            'nav' => $nav,
             'parents' => $parents,
             'targets' => $targets,
         ]);
@@ -43,11 +43,9 @@ class Nav extends AbstractController
     public function save(Request $request)
     {
         try {
-
             $data = $request->post();
 
             $res = $this->model->isUpdate($request->get('id') > 0)->save($data);
-
         } catch (\Exception $e) {
             $this->error('保存失败');
         }
@@ -61,6 +59,7 @@ class Nav extends AbstractController
         } catch (\Exception $e) {
             return $this->error('删除失败');
         }
+
         return $this->success('删除成功');
     }
 }

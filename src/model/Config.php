@@ -1,9 +1,7 @@
 <?php
+
 namespace techadmin\model;
 
-/**
- *
- */
 class Config extends Model
 {
     protected $table = 'techadmin_configs';
@@ -18,6 +16,5 @@ class Config extends Model
         self::$configs = self::column('value', 'key');
 
         return isset(self::$configs[$key]) ? self::$configs[$key] : '';
-
     }
 }

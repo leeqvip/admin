@@ -1,4 +1,5 @@
 <?php
+
 namespace techadmin\service\upload;
 
 use TechOne\Support\Manager;
@@ -6,12 +7,11 @@ use think\App;
 
 class Uploader extends Manager implements contract\Factory
 {
-
     protected $app;
 
     protected $filesystems = [
         'default' => '',
-        'disks'   => '',
+        'disks' => '',
     ];
 
     public function __construct(App $app)
@@ -32,8 +32,9 @@ class Uploader extends Manager implements contract\Factory
     public function createLocalDriver()
     {
         if (!isset($this->filesystems['disks'][$this->filesystems['default']])) {
-            throw new \Exception("文件存储驱动不存在");
+            throw new \Exception('文件存储驱动不存在');
         }
+
         return app(driver\Local::class, [$this->filesystems['disks'][$this->filesystems['default']]]);
     }
 }

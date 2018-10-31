@@ -2,9 +2,6 @@
 
 namespace techadmin\service\upload\driver;
 
-/**
- *
- */
 class Local
 {
     protected $config;
@@ -25,11 +22,12 @@ class Local
         }
         $file = request()->file('image');
 
-        $this->file = $file->move($this->config['root'] . $this->fileType);
+        $this->file = $file->move($this->config['root'].$this->fileType);
 
         if (!$this->file) {
             throw new \Exception($file->getError());
         }
+
         return $this;
     }
 
@@ -47,6 +45,7 @@ class Local
         if (!$this->file) {
             return '';
         }
-        return $this->config['url'] . $this->fileType . '/' . $this->file->getSaveName();
+
+        return $this->config['url'].$this->fileType.'/'.$this->file->getSaveName();
     }
 }

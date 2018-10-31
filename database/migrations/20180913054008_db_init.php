@@ -1,21 +1,22 @@
 <?php
 
-
 use Phinx\Migration\AbstractMigration;
 
 class DbInit extends AbstractMigration
 {
-    protected $tablePrefix='';
-        /**
+    protected $tablePrefix = '';
+
+    /**
      * Migrate Up.
      */
     public function up()
     {
-        if($this->getAdapter()->hasOption('table_prefix')){
-            $this->tablePrefix = $this->getAdapter()->getOption('table_prefix');            
+        if ($this->getAdapter()->hasOption('table_prefix')) {
+            $this->tablePrefix = $this->getAdapter()->getOption('table_prefix');
         }
 
-        $this->execute(<<<EOT
+        $this->execute(
+            <<<EOT
 
 -- ----------------------------
 -- Table structure for techadmin_adminers
@@ -309,9 +310,7 @@ INSERT INTO `techadmin_roles` VALUES ('1', '超级管理员', '2018-09-20 16:14:
 INSERT INTO `techadmin_roles_permissions` VALUES ('1', '1');
 INSERT INTO `techadmin_adminers_roles` VALUES ('1', '1');
 EOT
-
-
-            ); 
+            );
     }
 
     /**
@@ -319,8 +318,5 @@ EOT
      */
     public function down()
     {
-
     }
-
-
 }

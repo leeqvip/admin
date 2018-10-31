@@ -1,9 +1,7 @@
 <?php
+
 namespace techadmin\model;
 
-/**
- *
- */
 class Role extends Model
 {
     protected $table = 'techadmin_roles';

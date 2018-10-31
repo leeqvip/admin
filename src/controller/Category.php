@@ -1,14 +1,13 @@
 <?php
+
 namespace techadmin\controller;
 
 use techadmin\model\Category as CategoryModel;
 use techadmin\support\controller\AbstractController;
-use think\Controller;
 use think\Request;
 
 class Category extends AbstractController
 {
-
     protected $category;
 
     public function __construct(CategoryModel $category)
@@ -20,6 +19,7 @@ class Category extends AbstractController
     public function index()
     {
         $categorys = $this->category->flatTree();
+
         return $this->fetch('category/index', [
             'categorys' => $categorys,
         ]);
@@ -33,14 +33,13 @@ class Category extends AbstractController
 
         return $this->fetch('category/edit', [
             'category' => $category,
-            'parents'  => $parents,
+            'parents' => $parents,
         ]);
     }
 
     public function save(Request $request)
     {
         try {
-
             $data = $request->post();
 
             if (!empty($data['parent_id'])) {
@@ -50,10 +49,9 @@ class Category extends AbstractController
                 }
             }
 
-            $data['parent_path'] = isset($parent) ? $parent['parent_path'] . $parent['id'] . ',' : '0,';
+            $data['parent_path'] = isset($parent) ? $parent['parent_path'].$parent['id'].',' : '0,';
 
             $res = $this->category->isUpdate($request->get('id') > 0)->save($data);
-
         } catch (\Exception $e) {
             $this->error('保存失败');
         }
@@ -67,6 +65,7 @@ class Category extends AbstractController
         } catch (\Exception $e) {
             return $this->error('删除失败');
         }
+
         return $this->success('删除成功');
     }
 }

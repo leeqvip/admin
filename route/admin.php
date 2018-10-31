@@ -12,7 +12,6 @@ Route::group([
     'middleware' => ['techadmin.admin'],
 ], function () {
     Route::group('auth', function () {
-
         // 管理员
         Route::get('/adminer/delete', 'auth\\Adminer@delete')->name('techadmin.auth.adminer.delete');
         Route::get('/adminer/edit', 'auth\\Adminer@edit')->name('techadmin.auth.adminer.edit');
