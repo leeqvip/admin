@@ -4,17 +4,8 @@ use Phinx\Migration\AbstractMigration;
 
 class DbInit extends AbstractMigration
 {
-<<<<<<< HEAD
-<<<<<<< HEAD
     protected $tablePrefix = '';
 
-=======
-    protected $tablePrefix='';
->>>>>>> 5167ddb510d524886cc7b365feec18fd3844092c
-=======
-    protected $tablePrefix = '';
-
->>>>>>> b7180f45a453a8a1c0c80361df4db1fa4fae0a08
     /**
      * Migrate Up.
      */
@@ -319,14 +310,6 @@ INSERT INTO `techadmin_roles` VALUES ('1', '超级管理员', '2018-09-20 16:14:
 INSERT INTO `techadmin_roles_permissions` VALUES ('1', '1');
 INSERT INTO `techadmin_adminers_roles` VALUES ('1', '1');
 EOT
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 5167ddb510d524886cc7b365feec18fd3844092c
-=======
->>>>>>> b7180f45a453a8a1c0c80361df4db1fa4fae0a08
             );
     }
 
