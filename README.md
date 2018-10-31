@@ -1,6 +1,5 @@
 TechAdmin
-
-===============
+=====
 
 [![StyleCI](https://github.styleci.io/repos/149270146/shield?style=plastic&branch=master)](https://github.styleci.io/repos/149270146)
 [![Latest Stable Version](https://poser.pugx.org/techone/admin/v/stable)](https://packagist.org/packages/techone/admin)
