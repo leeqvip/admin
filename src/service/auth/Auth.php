@@ -1,4 +1,5 @@
 <?php
+
 namespace techadmin\service\auth;
 
 use techadmin\service\auth\contract\Authenticate;
@@ -20,7 +21,7 @@ class Auth implements contract\Auth
     public function __construct(Authenticate $authenticate, Guard $guard)
     {
         $this->authenticate = $authenticate;
-        $this->guard        = $guard;
+        $this->guard = $guard;
     }
 
     public function login(Request $request)
@@ -52,13 +53,13 @@ class Auth implements contract\Auth
     protected function validate(array $data = [])
     {
         $validate = Validate::make([
-            'admin_account'  => 'require|max:25',
+            'admin_account' => 'require|max:25',
             'admin_password' => 'require|max:25',
         ], [
-            'admin_account.require'  => '登录名必须',
-            'admin_account.max'      => '登录名最多不能超过25个字符',
+            'admin_account.require' => '登录名必须',
+            'admin_account.max' => '登录名最多不能超过25个字符',
             'admin_password.require' => '密码必须',
-            'admin_password.max'     => '密码最多不能超过25个字符',
+            'admin_password.max' => '密码最多不能超过25个字符',
         ]);
 
         if (!$validate->check($data)) {
@@ -76,6 +77,7 @@ class Auth implements contract\Auth
         if (!$adminer) {
             return false;
         }
+
         return $this->validCredentials($adminer, $credentials);
     }
 

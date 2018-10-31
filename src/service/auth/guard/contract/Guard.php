@@ -1,4 +1,5 @@
 <?php
+
 namespace techadmin\service\auth\guard\contract;
 
 use techadmin\service\auth\contract\Authenticate;

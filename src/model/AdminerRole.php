@@ -1,11 +1,9 @@
 <?php
+
 namespace techadmin\model;
 
 use think\model\Pivot;
 
-/**
- *
- */
 class AdminerRole extends Pivot
 {
     use traits\ModelHelper;

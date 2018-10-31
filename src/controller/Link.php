@@ -1,11 +1,11 @@
 <?php
+
 namespace techadmin\controller;
 
 use techadmin\model\Link as LinkModel;
 use techadmin\model\LinkBlock;
 use techadmin\service\upload\contract\Factory as Uploader;
 use techadmin\support\controller\AbstractController;
-use think\Controller;
 use think\Request;
 
 class Link extends AbstractController
@@ -24,7 +24,7 @@ class Link extends AbstractController
 
         $links = $this->model
             ->when($data['keywords'], function ($query) use ($data) {
-                $query->whereLike('title', '%' . $data['keywords'] . '%');
+                $query->whereLike('title', '%'.$data['keywords'].'%');
             })
             ->when($data['block'], function ($query) use ($data) {
                 $query->whereIn('block', $data['block']);
@@ -35,18 +35,20 @@ class Link extends AbstractController
                 'query' => $data,
             ]);
         $linkBlocks = $linkBlock->select();
+
         return $this->fetch('link/index', [
-            'links'      => $links,
+            'links' => $links,
             'linkBlocks' => $linkBlocks,
         ]);
     }
 
     public function edit(Request $request, LinkBlock $linkBlock)
     {
-        $link       = $this->model->find($request->get('id', 0));
+        $link = $this->model->find($request->get('id', 0));
         $linkBlocks = $linkBlock->select();
+
         return $this->fetch('link/edit', [
-            'link'       => $link,
+            'link' => $link,
             'linkBlocks' => $linkBlocks,
         ]);
     }
@@ -73,6 +75,7 @@ class Link extends AbstractController
         } catch (\Exception $e) {
             return $this->error('删除失败');
         }
+
         return $this->success('删除成功');
     }
 }

@@ -1,9 +1,7 @@
 <?php
+
 namespace techadmin\model;
 
-/**
- *
- */
 class Model extends \think\Model
 {
     use traits\ModelHelper;

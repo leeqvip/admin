@@ -1,9 +1,9 @@
 <?php
+
 namespace techadmin\controller\auth;
 
 use techadmin\model\Permission as PermissionModel;
 use techadmin\support\controller\AbstractController;
-use think\Controller;
 use think\Request;
 
 class Permission extends AbstractController
@@ -19,6 +19,7 @@ class Permission extends AbstractController
     public function index()
     {
         $permissions = $this->permission->paginate();
+
         return $this->fetch('auth/permission/index', [
             'permissions' => $permissions,
         ]);
@@ -27,6 +28,7 @@ class Permission extends AbstractController
     public function edit(Request $request)
     {
         $permission = $this->permission->find($request->get('id', 0));
+
         return $this->fetch('auth/permission/edit', [
             'permission' => $permission,
         ]);
@@ -51,6 +53,7 @@ class Permission extends AbstractController
         } catch (\Exception $e) {
             return $this->error('删除失败');
         }
+
         return $this->success('删除成功');
     }
 }

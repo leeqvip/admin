@@ -1,4 +1,5 @@
 <?php
+
 namespace techadmin\support\controller;
 
 use techadmin\model\Menu;
@@ -26,8 +27,8 @@ abstract class AbstractController extends Controller
     {
         if (is_file(admin_config_path('paginate.php'))) {
             $paginateAdmin = include admin_config_path('paginate.php');
-            $config        = Container::get('config');
-            $paginate      = $config->pull('paginate');
+            $config = Container::get('config');
+            $paginate = $config->pull('paginate');
             $config->set(array_merge(
                 is_array($paginate) ? $paginate : [],
                 $paginateAdmin
@@ -44,7 +45,7 @@ abstract class AbstractController extends Controller
 
     public function assignCommon()
     {
-        $menus   = app(Menu::class)->toTree();
+        $menus = app(Menu::class)->toTree();
         $adminer = Auth::user();
         $this->view->assign(compact('menus', 'adminer'));
     }

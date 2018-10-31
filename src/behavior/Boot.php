@@ -1,28 +1,30 @@
 <?php
+
 namespace techadmin\behavior;
 
 use think\App;
 use think\facade\Route;
 
 /**
- * Tech Admin 启动行为
+ * Tech Admin 启动行为.
  */
 class Boot
 {
     /**
-     *
      * @var App
      */
     protected $app;
 
     /**
-     * 路由分组名
+     * 路由分组名.
+     *
      * @var string
      */
     protected $name = 'admin';
 
     /**
-     * 控制器命名空间
+     * 控制器命名空间.
+     *
      * @var string
      */
     protected $namespace = '\\techadmin\\controller\\';
@@ -58,16 +60,16 @@ class Boot
             'techadmin',
         ];
         foreach ($configFileNames as $fileName) {
-            if (is_file(admin_config_path($fileName . '.php'))) {
-                $file       = admin_config_path($fileName . '.php');
+            if (is_file(admin_config_path($fileName.'.php'))) {
+                $file = admin_config_path($fileName.'.php');
                 $configName = pathinfo($file, PATHINFO_FILENAME);
-                $config     = $this->app->config->pull($configName);
+                $config = $this->app->config->pull($configName);
 
                 $this->app->config->load($file, $configName);
 
                 // 重新加载应用中的同名配置，以覆盖此配置
-                if (is_file($this->app->getConfigPath() . basename($file))) {
-                    $this->app->config->load($this->app->getConfigPath() . basename($file), $configName);
+                if (is_file($this->app->getConfigPath().basename($file))) {
+                    $this->app->config->load($this->app->getConfigPath().basename($file), $configName);
                 }
             }
         }
@@ -99,7 +101,7 @@ class Boot
         $files = scandir($routePath);
         foreach ($files as $file) {
             if (strpos($file, '.php')) {
-                $filename = $routePath . $file;
+                $filename = $routePath.$file;
                 // 导入路由配置
                 Route::group($this->name, function () use ($filename) {
                     $rules = include_once $filename;
@@ -113,7 +115,7 @@ class Boot
 
     public function initConsole()
     {
-        if (!(php_sapi_name() === 'cli' || php_sapi_name() === 'phpdbg')) {
+        if (!('cli' === php_sapi_name() || 'phpdbg' === php_sapi_name())) {
             return;
         }
     }

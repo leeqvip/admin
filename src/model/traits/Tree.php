@@ -4,7 +4,6 @@ namespace techadmin\model\traits;
 
 trait Tree
 {
-
     /**
      * @var string
      */
@@ -40,6 +39,7 @@ trait Tree
             }
             $this->getChildrenNodes($parentId, $children);
         }
+
         return null;
     }
 
@@ -51,8 +51,8 @@ trait Tree
         $branch = [];
 
         foreach ($nodes as $key => $value) {
-            $value['prefix'] = '|--' . str_repeat('---', $value['depth']);
-            $children        = isset($value['children']) ? $value['children'] : [];
+            $value['prefix'] = '|--'.str_repeat('---', $value['depth']);
+            $children = isset($value['children']) ? $value['children'] : [];
             if ($children) {
                 unset($value['children']);
             }
@@ -62,6 +62,7 @@ trait Tree
                 $branch = array_merge($branch, $this->flatTree($children));
             }
         }
+
         return $branch;
     }
 
@@ -88,7 +89,7 @@ trait Tree
                     $node['children'] = $children;
                 }
                 $node['depth'] = $depth;
-                $branch[]      = $node;
+                $branch[] = $node;
             }
         }
 
