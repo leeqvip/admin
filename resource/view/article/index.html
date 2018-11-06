@@ -52,7 +52,11 @@
                                     <td>
                                         <div class="image-title-group">
                                             <img src="{$article.image}" class="error-nopic" />
-                                            <p><strong>{$article.title}</strong></p>
+                                            <p><strong>{$article.title}</strong>
+                                                {foreach $article.tags as $tag}
+                                                <span class="am-badge am-badge-primary am-radius">{$tag.name}</span>
+                                                {/foreach}
+                                            </p>
                                         </div>
                                     </td>
                                     <td>{$article.created_at}</td>

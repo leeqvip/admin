@@ -3,7 +3,8 @@
 namespace techadmin\middleware;
 
 use techadmin\service\auth\facade\Auth;
-use think\model\Collection;
+use techadmin\service\casbin\Adapter;
+use Casbin\Enforcer;
 
 class PermissionCheck
 {
@@ -21,58 +22,14 @@ class PermissionCheck
             return $next($request);
         }
 
-        $allPermissions = $adminer->roles()->with('permissions')->select()->column('permissions');
+        $adapter = new Adapter();
+        $enforcer = new Enforcer(admin_config_path('casbin-model.conf'), $adapter);
 
-        foreach ($allPermissions as $permission) {
-            if (isset($permissions)) {
-                $permissions = $permission->merge($permissions);
-            } else {
-                $permissions = $permission;
-            }
-        }
-
-        if (!$this->permissionCheck($permissions)) {
+        if (true !== $enforcer->enforce($this->request->method(true), $this->parseCurrentPath())) {
             throw new \Exception('权限不足');
         }
 
         return $next($request);
-    }
-
-    public function permissionCheck($permission)
-    {
-        if ($permission instanceof Collection) {
-            foreach ($permission as $permission) {
-                if ($this->permissionCheck($permission)) {
-                    return true;
-                }
-            }
-        }
-        $currentPath = $this->parseCurrentPath();
-
-        $httpPaths = $this->parseHttpPath($permission->http_path);
-
-        foreach ($httpPaths as $httpPath) {
-            if ($this->checkHttpPath($httpPath, $currentPath)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    protected function checkHttpPath($httpPath, $currentPath)
-    {
-        if (!$this->endsWith($httpPath, '*')) {
-            if ($httpPath == $currentPath) {
-                return true;
-            }
-        } else {
-            if ($this->startsWith($currentPath, rtrim($httpPath, '*'))) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     public function shouldPassThrough()
@@ -110,27 +67,5 @@ class PermissionCheck
         return array_map(function ($row) {
             return rtrim(trim($row), '/');
         }, explode(PHP_EOL, $httpPath));
-    }
-
-    public function startsWith($haystack, $needles)
-    {
-        foreach ((array) $needles as $needle) {
-            if ('' !== $needle && substr($haystack, 0, \strlen($needle)) === (string) $needle) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public static function endsWith($haystack, $needles)
-    {
-        foreach ((array) $needles as $needle) {
-            if (substr($haystack, -\strlen($needle)) === (string) $needle) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }
