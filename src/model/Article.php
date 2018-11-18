@@ -4,7 +4,7 @@ namespace techadmin\model;
 
 class Article extends Model
 {
-    protected $table = 'techadmin_articles';
+    protected $table = 'articles';
 
     protected $append = ['summary_text'];
 

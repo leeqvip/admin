@@ -4,5 +4,5 @@ namespace techadmin\model;
 
 class LinkBlock extends Model
 {
-    protected $table = 'techadmin_links_blocks';
+    protected $table = 'links_blocks';
 }

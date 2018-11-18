@@ -2,13 +2,17 @@
 
 namespace techadmin\model;
 
-class Model extends \think\Model
+use think\Model as Base;
+use Db;
+
+abstract class Model extends Base
 {
-    use traits\ModelHelper;
-
-    protected $autoWriteTimestamp = 'timestamp';
-
-    protected $createTime = 'created_at';
-
-    protected $updateTime = 'updated_at';
+    public function __construct($data = [])
+    {
+        parent::__construct($data);
+        //TODO:初始化内容
+        if ($this->table) {
+            $this->table = Db::getConfig('prefix').$this->table;
+        }
+    }
 }

@@ -4,7 +4,7 @@ namespace techadmin\model;
 
 class Single extends Model
 {
-    protected $table = 'techadmin_single';
+    protected $table = 'single';
 
     protected $append = ['summary_text'];
 

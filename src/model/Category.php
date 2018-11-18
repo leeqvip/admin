@@ -6,7 +6,7 @@ class Category extends Model
 {
     use traits\Tree;
 
-    protected $table = 'techadmin_categorys';
+    protected $table = 'categorys';
 
     /**
      * 数据输出需要追加的属性.
@@ -23,6 +23,7 @@ class Category extends Model
     public static function mapType($type = null)
     {
         $map = [
+            'mark' => '标识',
             'list' => '列表',
             'list-img' => '图文',
             'single' => '单页',

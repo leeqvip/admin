@@ -12,10 +12,13 @@ class Single extends AbstractController
 {
     protected $single;
 
-    public function __construct(SingleModel $single)
+    protected $category;
+
+    public function __construct(SingleModel $single, Category $category)
     {
         parent::__construct();
         $this->single = $single;
+        $this->category = $category;
     }
 
     public function index(Request $request, Category $category)
@@ -62,6 +65,11 @@ class Single extends AbstractController
                 $data['image'] = $image->getUrlPath();
             }
 
+            $parent = $this->category->find($data['category_id']);
+            if (!$parent) {
+                return $this->error('所属栏目不存在');
+            }
+
             $hasBinding = $this->single->where('category_id', $data['category_id'])->when($data['id'], function ($query) use ($data) {
                 $query->where('id', '<>', $data['id']);
             })->count();
@@ -69,6 +77,8 @@ class Single extends AbstractController
             if ($hasBinding) {
                 throw new \Exception('该栏目已经绑定其他单页');
             }
+
+            $data['category_parent_path'] = isset($parent) ? $parent['parent_path'].$parent['id'].',' : '0,';
 
             $this->single->isUpdate($request->get('id') > 0)->save($data);
         } catch (\Exception $e) {

@@ -6,7 +6,7 @@
                 <div class="widget-head am-cf">
                     <div class="widget-title am-fl">添加/编辑</div>
                     <div class="widget-function am-fr">
-                        <a href="{{:url('techadmin.article')}}" class="am-icon-list" title="列表"></a>
+                        <a href="{:url('techadmin.article')}" class="am-icon-list" title="列表"></a>
                     </div>
                 </div>
                 <div class="widget-body am-fr">
@@ -86,7 +86,7 @@
                                         <div class="am-u-sm-12">
                                             {foreach $tags as $tag}
                                             <label class="am-checkbox-inline">
-                                                <input name="tags[]" type="checkbox" value="{$tag.id}" minchecked="1" {if in_array($tag.id,$article->tags->column('id'))}checked{/if}> {$tag.name}
+                                                <input name="tags[]" type="checkbox" value="{$tag.id}" minchecked="1" {if isset($article->tags) && in_array($tag.id,$article->tags->column('id'))}checked{/if}> {$tag.name}
                                             </label>
                                             {/foreach}
                                         </div>

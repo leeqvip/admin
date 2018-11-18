@@ -6,7 +6,7 @@
                 <div class="widget-head am-cf">
                     <div class="widget-title am-fl">添加/编辑</div>
                     <div class="widget-function am-fr">
-                        <a href="{{:url('techadmin.category')}}" class="am-icon-list" title="列表"></a>
+                        <a href="{:url('techadmin.category')}" class="am-icon-list" title="列表"></a>
                     </div>
                 </div>
                 <div class="widget-body am-fr">
@@ -21,6 +21,9 @@
                         <div class="am-form-group">
                             <label for="user-name" class="am-u-sm-12 am-form-label am-text-left">栏目类型 <span class="tpl-form-line-small-title">（必选）</span></label>
                             <div class="am-u-sm-12">
+                                <label class="am-radio-inline">
+                                    <input type="radio" name="type" value="mark" data-am-ucheck {if $category.type=='mark' }checked{/if}> 标识
+                                </label>
                                 <label class="am-radio-inline">
                                     <input type="radio" name="type" value="list" data-am-ucheck required {if $category.type=='list' }checked{/if}> 列表
                                 </label>

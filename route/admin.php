@@ -88,6 +88,14 @@ Route::group([
     Route::post('/link/edit', 'Link@save');
     Route::get('/link', 'Link@index')->name('techadmin.link');
 
+    // 招聘管理、
+    Route::get('/job/resume/item', 'Job@resumeItem')->name('techadmin.job.resume.item');
+    Route::get('/job/resume', 'Job@resume')->name('techadmin.job.resume');
+    Route::get('/job/delete', 'Job@delete')->name('techadmin.job.delete');
+    Route::get('/job/edit', 'Job@edit')->name('techadmin.job.edit');
+    Route::post('/job/edit', 'Job@save');
+    Route::get('/job', 'Job@index')->name('techadmin.job');
+
     Route::get('/message/delete', 'Message@delete')->name('techadmin.message.delete');
     Route::get('/message', 'Message@index')->name('techadmin.message');
 });

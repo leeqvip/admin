@@ -4,7 +4,7 @@ namespace techadmin\model;
 
 class Config extends Model
 {
-    protected $table = 'techadmin_configs';
+    protected $table = 'configs';
 
     public static $configs = [];
 

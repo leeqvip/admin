@@ -6,7 +6,7 @@ use techadmin\service\auth\contract\Authenticate;
 
 class Adminer extends Model implements Authenticate
 {
-    protected $table = 'techadmin_adminers';
+    protected $table = 'adminers';
 
     public function roles()
     {

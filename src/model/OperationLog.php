@@ -4,7 +4,7 @@ namespace techadmin\model;
 
 class OperationLog extends Model
 {
-    protected $table = 'techadmin_operation_logs';
+    protected $table = 'operation_logs';
 
     public function getBrowserAttr()
     {

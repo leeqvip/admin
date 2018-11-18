@@ -4,5 +4,5 @@ namespace techadmin\model;
 
 class AdvertisingBlock extends Model
 {
-    protected $table = 'techadmin_advertisings_blocks';
+    protected $table = 'advertisings_blocks';
 }

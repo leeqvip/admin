@@ -6,7 +6,7 @@ class Nav extends Model
 {
     use traits\Tree;
 
-    protected $table = 'techadmin_navs';
+    protected $table = 'navs';
 
     protected $append = ['target_text'];
 

@@ -4,7 +4,7 @@ namespace techadmin\model;
 
 class Role extends Model
 {
-    protected $table = 'techadmin_roles';
+    protected $table = 'roles';
 
     public function permissions()
     {
