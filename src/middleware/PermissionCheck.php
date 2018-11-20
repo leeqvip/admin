@@ -3,8 +3,7 @@
 namespace techadmin\middleware;
 
 use techadmin\service\auth\facade\Auth;
-use techadmin\service\casbin\Adapter;
-use Casbin\Enforcer;
+use Casbin;
 
 class PermissionCheck
 {
@@ -22,10 +21,7 @@ class PermissionCheck
             return $next($request);
         }
 
-        $adapter = new Adapter();
-        $enforcer = new Enforcer(admin_config_path('casbin-model.conf'), $adapter);
-
-        if (true !== $enforcer->enforce($this->request->method(true), $this->parseCurrentPath())) {
+        if (true !== Casbin::enforce($this->request->method(true), $this->parseCurrentPath())) {
             throw new \Exception('权限不足');
         }
 

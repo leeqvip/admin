@@ -19,7 +19,6 @@
         "topthink/think-captcha": "^2.0",
         "league/flysystem": "^1.0",
         "techone/support": "0.*",
-        "casbin/casbin": "^0.1",
         "casbin/think-adapter": "^0.1.0"
     },
     "autoload": {

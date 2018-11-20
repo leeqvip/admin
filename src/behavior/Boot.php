@@ -57,6 +57,7 @@ class Boot
     {
         $configFileNames = [
             'filesystems',
+            'casbin',
             'techadmin',
         ];
         foreach ($configFileNames as $fileName) {
