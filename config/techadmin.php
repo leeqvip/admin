@@ -9,7 +9,7 @@ return [
     'template' => [
         'view_path' => admin_view_path(),
         'tpl_replace_string' => [
-            '__TECHADMIN_ASSETS__' => '/vendor/techadmin/assets',
+            '__TECHADMIN_ASSETS__' => '/tmp/assets',
         ],
     ],
 ];

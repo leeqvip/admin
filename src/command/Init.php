@@ -28,7 +28,7 @@ class Init extends Command
             new Local(__DIR__.'/../../resource/assets')
         );
         $traget = new Filesystem(
-            new Local(Loader::getRootPath().'public/vendor/techadmin/assets')
+            new Local(Loader::getRootPath().'public/tmp/assets')
         );
 
         $manager = new MountManager([
