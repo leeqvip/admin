@@ -15,4 +15,17 @@ abstract class Model extends Base
             $this->table = Db::getConfig('prefix').$this->table;
         }
     }
+
+    public function updateOrCreate(array $attributes, array $values = [])
+    {
+        $first = $this->where($attributes)->find();
+        if ($first) {
+            $first->data($values);
+            $first->save();
+
+            return $first;
+        } else {
+            return self::create($values, true);
+        }
+    }
 }
