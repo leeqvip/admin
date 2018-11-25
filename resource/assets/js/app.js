@@ -91,7 +91,8 @@ $(document).ready(function() {
         }
         var E = window.wangEditor
         var editor = new E($(this)[0]);
-        editor.customConfig.uploadImgShowBase64 = true;
+        // editor.customConfig.uploadImgShowBase64 = true;
+        editor.customConfig.uploadImgServer = '/admin/upload/image'
         var name = $(this).attr('data-name') || 'content';
         var content = $(this).after('<textarea name="' + name + '" style="display:none;"></textarea>');
         var $text = $(this).next('textarea[name=' + name + ']')

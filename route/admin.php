@@ -98,4 +98,6 @@ Route::group([
 
     Route::get('/message/delete', 'Message@delete')->name('techadmin.message.delete');
     Route::get('/message', 'Message@index')->name('techadmin.message');
+
+    Route::any('/upload/image', 'Upload@image')->name('techadmin.upload.image');
 });
