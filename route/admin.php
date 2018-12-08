@@ -100,4 +100,5 @@ Route::group([
     Route::get('/message', 'Message@index')->name('techadmin.message');
 
     Route::any('/upload/image', 'Upload@image')->name('techadmin.upload.image');
+    Route::any('/upload/ueditor', 'Upload@ueditor')->name('techadmin.upload.ueditor');
 });

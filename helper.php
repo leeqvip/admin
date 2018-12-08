@@ -2,6 +2,17 @@
 
 use techadmin\model\Config;
 
+function script_path()
+{
+    if ('cli' == PHP_SAPI) {
+        $scriptName = realpath($_SERVER['argv'][0]);
+    } else {
+        $scriptName = $_SERVER['SCRIPT_FILENAME'];
+    }
+
+    return realpath(dirname($scriptName)).'/';
+}
+
 function app_path($path = '')
 {
     return env('app_path').ltrim($path, '/');
@@ -9,7 +20,8 @@ function app_path($path = '')
 
 function public_path($path = '')
 {
-    return app_path('../public/').ltrim($path, '/');
+    return script_path().ltrim($path, '/');
+    // return app_path('../public/').ltrim($path, '/');
 }
 
 function admin_path($path = '')

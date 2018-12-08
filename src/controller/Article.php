@@ -83,7 +83,7 @@ class Article extends AbstractController
 
             $tags = isset($data['tags']) ? $data['tags'] : [];
 
-            $article = $this->article->create($data, true, true);
+            $article = $this->article->updateOrCreate(['id' => $request->get('id', 0)], $data);
 
             foreach ($tags as $tag) {
                 ArticleTag::create([

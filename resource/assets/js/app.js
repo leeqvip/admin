@@ -26,6 +26,34 @@ function autoResize() {
     $(".content-wrapper").css('min-height', parseInt(minHeight));
 }
 
+function bootWangEditor(obj){
+    if (!window.wangEditor) {
+        $.ajax({
+            url: adminApp.path.assets + '/editor/wangEditor/wangEditor.min.js',
+            async: false,
+            dataType: 'script'
+        });
+    }
+    var E = window.wangEditor
+    var editor = new E(obj[0]);
+    // editor.customConfig.uploadImgShowBase64 = true;
+    editor.customConfig.uploadImgServer = '/admin/upload/image'
+    var name = $(this).attr('data-name') || 'content';
+    var content = $(this).after('<textarea name="' + name + '" style="display:none;"></textarea>');
+    var $text = $(this).next('textarea[name=' + name + ']')
+    editor.customConfig.onchange = function(html) {
+        $text.val(html)
+    }
+    editor.create()
+    $text.val(editor.txt.html())
+}
+
+function bootUEditor(obj){
+    if (!window.uEditor) {
+        document.write('<script type="text/javascript" src="'+ adminApp.path.assets'/editor/ueditor/_src/api.js"></script>');
+    }
+}
+
 function adminInit() {
     autoResize();
     autoLeftNav();
@@ -82,25 +110,12 @@ $(document).ready(function() {
         }
     });
     $('.form-editor').each(function(index, el) {
-        if (!window.wangEditor) {
-            $.ajax({
-                url: adminApp.path.assets + '/wangEditor/wangEditor.min.js',
-                async: false,
-                dataType: 'script'
-            });
+        var dataEditor = $(this).attr('data-editor');
+        if(dataEditor == 'ueditor'){
+            bootUEditor($(this))
+        }else{
+            bootWangEditor($(this))
         }
-        var E = window.wangEditor
-        var editor = new E($(this)[0]);
-        // editor.customConfig.uploadImgShowBase64 = true;
-        editor.customConfig.uploadImgServer = '/admin/upload/image'
-        var name = $(this).attr('data-name') || 'content';
-        var content = $(this).after('<textarea name="' + name + '" style="display:none;"></textarea>');
-        var $text = $(this).next('textarea[name=' + name + ']')
-        editor.customConfig.onchange = function(html) {
-            $text.val(html)
-        }
-        editor.create()
-        $text.val(editor.txt.html())
     });
 });
 $(window).resize(function() {
